@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "my-webisite"
+version = "0.0.1"
+description = "This project will include all the code which will display my skill using django to build a portfolio website and other dummy websites for demonstration purposes"
+authors = ["Sanket Wagh"]
+license = "Attribution 4.0 International (CC BY 4.0)"
+readme = "README.md"
+packages = [{include = "my_webisite"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Django = "^4.2.1"
+Pillow = "^9.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
