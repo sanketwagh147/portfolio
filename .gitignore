@@ -1,0 +1,5 @@
+architechture/**
+*.xlsx
+*.pdf
+*.pyc
+__pycache__
