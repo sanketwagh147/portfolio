@@ -3,3 +3,4 @@ architechture/**
 *.pdf
 *.pyc
 __pycache__
+*.sqlite3
