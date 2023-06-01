@@ -14,23 +14,29 @@
 <body>
     <div class="container pt-5">
         <h1>This is my home page from template</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Kanda</th>
-                    <th>batata</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <td>1</td>
-                <td>1</td>
-            </tbody>
-            
-        </table>
-    </div>
-    <div class="container">
-        <img src="{% static 'images/sample.webp' %}" alt=""/>
+        <h2>Employee List</h2>
+            {% comment %} <img src="{% static 'images/sample.webp' %}" alt=""/> {% endcomment %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sr. no</th>
+                        <th>Employee name</th>
+                        <th>Employee Designation</th>
+                        <th>phone number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                    <tr>
+                        <td>{{forloop.counter}} </td>
+                        <td><a href="{% url 'employee_detail' employee.id %}">{{employee}} </a></td>
+                        <td>{{employee.designation}} </td>
+                        <td>{{employee.phone_number}} </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
     </div>
     
 </body>
