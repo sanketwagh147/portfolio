@@ -24,3 +24,8 @@
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 }
+
+.sign-in {
+	width: 60% !important;
+	min-height: auto !important;
+}
