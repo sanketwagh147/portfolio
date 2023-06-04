@@ -38,10 +38,10 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    RESTAURANT = 1
+    VENDOR = 1
     CUSTOMER = 2
 
-    ROLE_CHOICE = ((RESTAURANT, "Restaurant"), (CUSTOMER, "Customer"))
+    ROLE_CHOICE = ((VENDOR, "Vendor"), (CUSTOMER, "Customer"))
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     username = models.CharField(max_length=50, unique=True)
@@ -75,7 +75,7 @@ class User(AbstractBaseUser):
         return True
 
 
-class userProfile(models.Model):
+class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     profile_picture = models.ImageField(
         upload_to="users/profile_pictures", blank=True, null=True
@@ -96,4 +96,3 @@ class userProfile(models.Model):
 
     def __str__(self):
         return self.user.email
-

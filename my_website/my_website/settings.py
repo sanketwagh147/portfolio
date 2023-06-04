@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "todo",
     "tomato",
     "accounts",
+    "vendor",
 ]
 
 MIDDLEWARE = [
