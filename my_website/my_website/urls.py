@@ -26,4 +26,5 @@ urlpatterns = [
     path("dev", views.home, name="home_test"),
     path("employees/", include("employees.urls")),
     path("todo/", include("todo.urls")),
+    path("tomato/", include("tomato.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
