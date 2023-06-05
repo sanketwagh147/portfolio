@@ -142,3 +142,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.User"
 
 MESSAGE_TAGS = {messages.ERROR: "danger"}
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config("EMAIL_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_PASS")
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "TOMATO FOOD ONLINE MARKETPLACE"
