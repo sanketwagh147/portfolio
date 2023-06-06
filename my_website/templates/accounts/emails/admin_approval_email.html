@@ -1,0 +1,10 @@
+{% autoescape off %}
+Hi {{user.first_name}},
+
+{% if is_approved %}
+Congratulations ! Your restaurant is approved by our admin team.
+{% else %}
+Sorry ! Your restaurant not approved by our admin team, Please check your documents and get back to use .   
+{% endif %}
+
+{% endautoescape %}

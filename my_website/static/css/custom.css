@@ -18,6 +18,7 @@
 	right: 20px;
 	animation-name: show-toast;
 	animation-duration: 5s;
+	z-index: 999;
 }
 
 .no-padding-sides {
