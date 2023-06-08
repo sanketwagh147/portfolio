@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "tomato",
     "accounts",
     "vendor",
+    "menu",
 ]
 
 MIDDLEWARE = [

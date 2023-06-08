@@ -30,7 +30,7 @@
 	width: 60% !important;
 	min-height: auto !important;
 }
-.btn.btn-info {
+.btn {
 	padding: 2px 1.75rem;
 	cursor: pointer;
 }

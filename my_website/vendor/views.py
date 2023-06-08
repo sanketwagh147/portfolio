@@ -1,12 +1,13 @@
-from accounts.forms import UserProfileForm
-from accounts.models import UserProfile
-from accounts.views import check_role_vendor
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import get_object_or_404, redirect, render
 
+from accounts.forms import UserProfileForm
+from accounts.models import UserProfile
+from accounts.views import check_role_vendor
+from menu.models import Category, Vendor
+
 from .forms import VendorForm
-from .models import Vendor
 
 # Create your views here.
 
@@ -34,7 +35,6 @@ def v_profile(request):
                 "vendor": vendor,
             }
         return render(request, "vendor/vprofile.html", context=context)
-
     else:
         profile_form = UserProfileForm(instance=profile)
         vendor_form = VendorForm(instance=vendor)
@@ -45,3 +45,11 @@ def v_profile(request):
             "vendor": vendor,
         }
         return render(request, "vendor/vprofile.html", context=context)
+
+
+def menu_builder(request):
+    vendor = Vendor.objects.get(user=request.user)
+    categories = Category.objects.filter(vendor=vendor)
+    print(categories)
+    context = {"categories": categories}
+    return render(request, "vendor/menu_builder.html", context)

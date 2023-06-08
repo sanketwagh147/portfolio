@@ -1,14 +1,14 @@
 <div class="user-account-nav user-account-sidebar">
     <div class="user-nav-list">
         <ul>
-            <li class="{% if '/accounts/vendorDashboard/' in request.path or '/accounts/vendor/' in request.path %}active {% endif %}">
+            <li class="{% if 'tomato/accounts/vendorDashboard/' in request.path %}active {% endif %}">
                 <a href="{% url 'vendorDashboard' %}"><i class="icon-dashboard3"></i>Dashboard</a>
             </li>
             <li class="{% if 'profile' in request.path %}active{% endif %}">
                 <a href="{% url 'vprofile' %}"><i class="icon-building"></i>My Restaurant</a>
             </li>
-            <li>
-                <a href="restaurant-menu-builder.html"><i class="icon-menu5"></i>Menu Builder</a>
+            <li class="{% if 'menu-builder' in request.path %}active {% endif %}">
+                <a href="{% url 'menu_builder' %}"><i class="icon-menu5"></i>Menu Builder</a>
             </li>
             <li>
                 <a href="restaurant-orders.html"><i class="icon-add_shopping_cart"></i>Orders</a>
