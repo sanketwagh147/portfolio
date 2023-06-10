@@ -1,6 +1,5 @@
-from django.urls import path
-
 from accounts import views as AccountViews
+from django.urls import path
 
 from . import views
 
@@ -9,7 +8,7 @@ urlpatterns = [
     path("profile/", views.v_profile, name="vprofile"),
     path("menu-builder/", views.menu_builder, name="menu_builder"),
     path(
-        "menu-builder/category<int:pk>/",
+        "menu-builder/category/<int:pk>/",
         views.fooditems_by_category,
         name="fooditems_by_category",
     ),
@@ -22,5 +21,13 @@ urlpatterns = [
         "menu-builder/category/delete/<int:pk>",
         views.delete_category,
         name="delete_category",
+    ),
+    # Food Item Crud
+    path("menu-builder/food/add/", views.add_food, name="add_food"),
+    path("menu-builder/food/add/<int:pk>/", views.edit_food, name="edit_food"),
+    path(
+        "menu-builder/food/delete/<int:pk>",
+        views.delete_food,
+        name="delete_food",
     ),
 ]

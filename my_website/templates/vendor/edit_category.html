@@ -1,6 +1,7 @@
 {% extends 'tomato/base.html' %}
 {% load static %}
 
+
 {% block content %}
     <div class="main-section">
         {% include 'tomato/includes/cover.html' %}
@@ -14,6 +15,11 @@
                             <div class="user-holder">
                                 <h5 class="text-uppercase">Build your food menu</h5>
                                 <hr>
+                                <button class="btn btn-secondary" onclick="history.back()">
+                                    <i class="fa fa-angle-left" aria-hidden="true"></i>Back
+                                </button>
+                                <br>
+                                <br>
                                 <h6>Modify Category</h6>
                                 <form action="{% url 'edit_category' category.id %}" method="POST">
                                     {% csrf_token %}
@@ -44,6 +50,9 @@
                                     <button type="submit" class="btn btn-info">
                                         <i class="fa fa-check" aria-hiden="true"></i> &nbsp;
                                     </button>
+                                    <a href="{% url 'delete_category' category.id %}"
+                                       onclick="return confirm('Are you sure you want to delete this category ?')"
+                                       class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                                 </form>
 
                             </div>

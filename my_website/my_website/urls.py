@@ -27,5 +27,5 @@ urlpatterns = [
     path("employees/", include("employees.urls")),
     path("todo/", include("todo.urls")),
     path("tomato/", include("tomato.urls")),
-    path("tomato/accounts/", include("accounts.urls")),
+    path("tomato/", include("accounts.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
