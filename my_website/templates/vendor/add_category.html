@@ -1,0 +1,58 @@
+{% extends 'tomato/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main-section">
+        {% include 'tomato/includes/cover.html' %}
+ 
+        <div class="page-section account-header buyer-logged-in">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">{% include "tomato/includes/v_sidebar.html" %}</div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <div class="user-dashboard loader-holder">
+                            <div class="user-holder">
+                                <h5 class="text-uppercase">Build your food menu</h5>
+                                <hr>
+                                <h6>Add new category</h6>
+                                <form action="{% url 'add_category' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-fields-set">
+                                        <div class="row">
+                                            <div class="col-lg-12 co-md-12 col-sm-12">
+                                                <div class="field-holder">
+                                                    <label>
+                                                        Category Name <span class="text-danger">*</span>
+                                                    </label>
+                                                    {{ form.category_name }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 co-md-12 col-sm-12">
+                                                <div class="field-holder">
+                                                    <label>Category Description</label>
+                                                    {{ form.description }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {% for field in form %}
+                                        {% if field.errors %}
+                                            {% for error in field.errors %}<li style="color:red;">{{ error }}</li>{% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <button type="submit" class="btn btn-info">
+                                        <i class="fa fa-check" aria-hiden="true"></i> &nbsp;Create
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "tomato/includes/alert.html" %}
+{% endblock content %}
