@@ -32,7 +32,7 @@
                     <div class="login-option">
 
                         {% if user.is_authenticated %}
-                        <a href=""><i class="fa fa-shopping-cart text-danger" style="font-size:20px"></i>
+                        <a href="{% url 'cart' %}"><i class="fa fa-shopping-cart text-danger" style="font-size:20px"></i>
                         <span class="badge badge-warning"
                               id="cart_counter"
                               style="border-radiues:50px;

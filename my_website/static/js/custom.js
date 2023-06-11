@@ -84,6 +84,13 @@ $(document).ready(function () {
 					let cart_counter = response.cart_counter.cart_count;
 					$("#cart_counter").html(cart_counter);
 					$("#qty-" + food_id).html(response.qty);
+
+					//subtotal tax and grand total
+					applyCartAmount(
+						response.cart_amount.sub_total,
+						response.cart_amount.tax,
+						response.cart_amount.grand_total
+					);
 				}
 			},
 		});
@@ -92,22 +99,31 @@ $(document).ready(function () {
 	// Decrease cart
 	$(".remove_from_cart").on("click", function (e) {
 		e.preventDefault();
-		food_id = $(this).attr("data-id");
-		url = $(this).attr("data-url");
+		let food_id = $(this).attr("data-id");
+		let url = $(this).attr("data-url");
+		let cart_id = $(this).attr("data-cart");
 		$.ajax({
 			type: "GET",
 			url: url,
 			success: function (response) {
-				if (response.status == "LOGIN_REQUIRED") {
-					swal(response.message, "", "info").then(function () {
-						window.location = "/tomato/login";
-					});
-				} else if (response.status == "Failed") {
+				console.log(response);
+				if (response.status == "Failed") {
 					swal(response.message, "", "error");
 				} else {
 					let cart_counter = response.cart_counter.cart_count;
 					$("#cart_counter").html(cart_counter);
+					swal(response.status, response.message, "success");
+					$("#cart_counter").html(cart_counter);
 					$("#qty-" + food_id).html(response.qty);
+					applyCartAmount(
+						response.cart_amount.sub_total,
+						response.cart_amount.tax,
+						response.cart_amount.grand_total
+					);
+					if (response.qty == 0) {
+						checkCartCounter();
+						removeCartItem(0, cart_id);
+					}
 				}
 			},
 		});
@@ -118,4 +134,71 @@ $(document).ready(function () {
 		let quantity = $(this).attr("data-qty");
 		$("#" + food_id).html(quantity);
 	});
+
+	// Delete cCartitem
+	$(".delete_cart").on("click", function (e) {
+		e.preventDefault();
+		cart_id = $(this).attr("data-id");
+		url = $(this).attr("data-url");
+		$.ajax({
+			type: "GET",
+			url: url,
+			success: function (response) {
+				if (response.status == "Failed") {
+					swal(response.message, "", "error");
+				} else {
+					let cart_counter = response.cart_counter.cart_count;
+					$("#cart_counter").html(cart_counter);
+					$("#qty-" + cart_id).html(response.qty);
+					swal(response.status, response.message, "success");
+					applyCartAmount(
+						response.cart_amount.sub_total,
+						response.cart_amount.tax,
+						response.cart_amount.grand_total
+					);
+					if (window.location.pathname == "/tomato/cart/") {
+						removeCartItem(0, cart_id);
+						checkCartCounter();
+					}
+				}
+			},
+		});
+	});
+
+	// delete cart element if quantiy is zero
+
+	function removeCartItem(cartItemQuantity, CartId) {
+		if (cartItemQuantity <= 0) {
+			let cart_item = document.getElementById("cart-item-" + CartId);
+
+			if (cart_item) {
+				cart_item.remove();
+			}
+		}
+	}
+
+	//Check if teh cart is empty
+	const checkCartCounter = function () {
+		let cart_counter = document.getElementById("cart_counter").innerHTML;
+
+		if (cart_counter == 0) {
+			let emptyCart = document.getElementById("empty-cart");
+			if (emptyCart) {
+				emptyCart.classList.remove("d-none");
+			}
+		}
+	};
+
+	// apply cart amounts
+	const applyCartAmount = function (subTotal, tax, grandTotal) {
+		console.log(subTotal);
+		console.log(tax);
+		console.log(grandTotal);
+
+		if (window.location.pathname == "/tomato/cart/") {
+			$("#subtotal").html(subTotal);
+			$("#tax").html(tax);
+			$("#total").html(grandTotal);
+		}
+	};
 });
