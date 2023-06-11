@@ -124,7 +124,12 @@ def remove_from_cart(request, food_id=None):
 @login_required
 def cart(request):
     cart_items = Cart.objects.filter(user=request.user).order_by("created_at")
-    context = {"cart_items": cart_items}
+    print(cart_items)
+
+    context = dict(cart_items=cart_items)
+    context |= get_cart_amount(request)  # type: ignore
+    print("cart content", context)
+    print(context)
     return render(request, "marketplace/cart.html", context)
 
 
