@@ -1,9 +1,15 @@
 from django.db.models import Prefetch
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
+from marketplace.models import Cart
 from menu.models import Category, FoodItem
 from vendor.models import Vendor
 
+from .context_processors import get_cart_counter
+
 # Create your views here.
+SUCCESS = "Success"
+FAILED = "Failed"
 
 
 def marketplace(request):
@@ -18,5 +24,94 @@ def vendor_detail(request, vendor_slug):
     categories = Category.objects.filter(vendor=vendor).prefetch_related(
         Prefetch("fooditems", queryset=FoodItem.objects.filter(is_available=True))
     )
-    context = {"vendor": vendor, "categories": categories}
+    if request.user.is_authenticated:
+        cart_items = Cart.objects.filter(user=request.user)
+    else:
+        cart_items = None
+    context = {"vendor": vendor, "categories": categories, "cart_items": cart_items}
     return render(request, "marketplace/vendor_detail.html", context)
+
+
+def add_to_cart(request, food_id=None):
+    if request.user.is_authenticated:
+        if request.headers.get("x-requested-with") != "XMLHttpRequest":
+            return JsonResponse({"status": FAILED, "message": "Invalid Request"})
+
+        # Try if food exists
+        food_item = FoodItem.objects.get(id=food_id)
+        if not food_item:
+            return JsonResponse(
+                {"status": FAILED, "message": "This food item does not exists"}
+            )
+
+        #  Check if user has already added the same item to the cart
+        try:
+            check_cart = Cart.objects.get(user=request.user, food_item=food_item)
+            check_cart.quantity += 1
+            check_cart.save()
+            return JsonResponse(
+                {
+                    "status": SUCCESS,
+                    "message": "Increased the cart quantity",
+                    "cart_counter": get_cart_counter(request),
+                    "qty": check_cart.quantity,
+                }
+            )
+        except Exception as err:
+            check_cart = Cart.objects.create(
+                user=request.user, food_item=food_item, quantity=1
+            )
+            return JsonResponse(
+                {
+                    "status": SUCCESS,
+                    "message": "Food item added to the cart",
+                    "cart_counter": get_cart_counter(request),
+                    "qty": check_cart.quantity,
+                }
+            )
+
+    return JsonResponse(
+        {"status": "LOGIN_REQUIRED", "message": "Please login to continue"}
+    )
+
+
+def remove_from_cart(request, food_id=None):
+    if request.user.is_authenticated:
+        if request.headers.get("x-requested-with") != "XMLHttpRequest":
+            return JsonResponse({"status": FAILED, "message": "Invalid Request"})
+
+        # Try if food exists
+        food_item = FoodItem.objects.get(id=food_id)
+        if not food_item:
+            return JsonResponse(
+                {"status": FAILED, "message": "This food item does not exists"}
+            )
+
+        #  Check if user has already added the same item to the cart
+        try:
+            check_cart = Cart.objects.get(user=request.user, food_item=food_item)
+            if check_cart.quantity > 1:
+                check_cart.quantity -= 1
+                check_cart.save()
+            else:
+                check_cart.delete()
+                check_cart.quantity = 0
+            return JsonResponse(
+                {
+                    "status": SUCCESS,
+                    "message": "Decrease food quantity",
+                    "cart_counter": get_cart_counter(request),
+                    "qty": check_cart.quantity,
+                }
+            )
+        except Exception as err:
+            return JsonResponse(
+                {
+                    "status": FAILED,
+                    "message": "You don not have item in your cart",
+                }
+            )
+
+    return JsonResponse(
+        {"status": "LOGIN_REQUIRED", "message": "Please login to continue"}
+    )

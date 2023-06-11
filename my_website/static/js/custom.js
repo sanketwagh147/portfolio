@@ -63,3 +63,59 @@ function onPlaceChanged() {
 		}
 	}
 }
+
+$(document).ready(function () {
+	// Add to cart
+	$(".add_to_cart").on("click", function (e) {
+		e.preventDefault();
+		food_id = $(this).attr("data-id");
+		url = $(this).attr("data-url");
+		$.ajax({
+			type: "GET",
+			url: url,
+			success: function (response) {
+				if (response.status == "LOGIN_REQUIRED") {
+					swal(response.message, "", "info").then(function () {
+						window.location = "/tomato/login";
+					});
+				} else if (response.status == "Failed") {
+					swal(response.message, "", "error");
+				} else {
+					let cart_counter = response.cart_counter.cart_count;
+					$("#cart_counter").html(cart_counter);
+					$("#qty-" + food_id).html(response.qty);
+				}
+			},
+		});
+	});
+
+	// Decrease cart
+	$(".remove_from_cart").on("click", function (e) {
+		e.preventDefault();
+		food_id = $(this).attr("data-id");
+		url = $(this).attr("data-url");
+		$.ajax({
+			type: "GET",
+			url: url,
+			success: function (response) {
+				if (response.status == "LOGIN_REQUIRED") {
+					swal(response.message, "", "info").then(function () {
+						window.location = "/tomato/login";
+					});
+				} else if (response.status == "Failed") {
+					swal(response.message, "", "error");
+				} else {
+					let cart_counter = response.cart_counter.cart_count;
+					$("#cart_counter").html(cart_counter);
+					$("#qty-" + food_id).html(response.qty);
+				}
+			},
+		});
+	});
+
+	$(".item_qty").each(function () {
+		let food_id = $(this).attr("id");
+		let quantity = $(this).attr("data-qty");
+		$("#" + food_id).html(quantity);
+	});
+});
