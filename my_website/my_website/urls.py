@@ -28,4 +28,5 @@ urlpatterns = [
     path("todo/", include("todo.urls")),
     path("tomato/", include("tomato.urls")),
     path("tomato/", include("accounts.urls")),
+    path("tomato/marketplace/", include("marketplace.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, render
+from django.template.defaultfilters import slugify
 from django.utils.http import urlsafe_base64_decode
 from vendor.forms import VendorForm
 from vendor.models import Vendor
@@ -105,6 +106,8 @@ def registerVendor(request):
             user.save()
             vendor = vendor_form.save(commit=False)
             vendor.user = user
+            vendor_name = vendor_form.cleaned_data["vendor_name"] + str(user.id)
+            vendor.vendor_slug = slugify(vendor_name)
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile
             vendor.save()
