@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from marketplace.models import Cart
@@ -158,3 +158,26 @@ def delete_cart(request, cart_id):
             return JsonResponse(
                 {"status": FAILED, "message": "Cart  item does not exist"}
             )
+
+
+def search(request):
+    address = request.GET["address"]
+    latitude = request.GET["lat"]
+    longitude = request.GET["lng"]
+    radius = request.GET["radius"]
+    keyword = request.GET["rest_name"]
+
+    # get vendor id that has food user is searching fo
+
+    vendor_by_food_item = FoodItem.objects.filter(
+        food_title__icontains=keyword, is_available=True
+    ).values_list("vendor", flat=True)
+
+    vendors = Vendor.objects.filter(
+        Q(id__in=vendor_by_food_item)
+        | Q(vendor_name__icontains=keyword, is_approved=True, user__is_active=True)
+    )
+    vendor_count = vendors.count()
+    context = {"vendors": vendors, "vendors_count": vendor_count}
+    print(vendors)
+    return render(request, "marketplace/listings.html", context)

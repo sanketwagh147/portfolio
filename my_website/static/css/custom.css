@@ -34,3 +34,6 @@
 	padding: 2px 1.75rem;
 	cursor: pointer;
 }
+.main-search-fancy .field-holder input[type="text"] {
+	color: #000 !important;
+}
