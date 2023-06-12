@@ -55,6 +55,11 @@
                                                     <span>
                                                         <small class="text-muted">{{ vendor.user_profile.address|default_if_none:"" }}</small>
                                                     </span>
+                                                    <br>
+                                                    {% if source_location %}
+                                                        <span><small><strong>{{ vendor.kms }}</strong> km away from s {{ source_location }}</small></span>
+                                                    {% endif %}
+
  
  
                                                 </div>

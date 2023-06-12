@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from email.policy import default
 from pathlib import Path
 
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     "vendor",
     "menu",
     "marketplace",
+    "django.contrib.gis",
 ]
 
 MIDDLEWARE = [
@@ -93,7 +95,8 @@ WSGI_APPLICATION = "my_website.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        # "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": config("DB_NAME"),
         "USER": config("DB_USER"),
         "PASSWORD": config("DB_PASSWORD"),
@@ -155,3 +158,15 @@ EMAIL_HOST_PASSWORD = config("EMAIL_PASS")
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "TOMATO FOOD ONLINE MARKETPLACE"
 GOOGLE_API_KEY = config("GOOGLE_API_KEY")
+
+os.environ["PATH"] = (
+    r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-packages\osgeo"
+    + ";"
+    + os.environ["PATH"]
+)
+os.environ["PROJ_LIB"] = (
+    r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-packages\osgeo\data\proj"
+    + ";"
+    + os.environ["PATH"]
+)
+GDAL_LIBRARY_PATH = r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-packages\osgeo\gdal304.dll"
