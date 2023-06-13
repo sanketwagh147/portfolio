@@ -201,4 +201,119 @@ $(document).ready(function () {
 			$("#total").html(grandTotal);
 		}
 	};
+
+	// Add timing
+
+	$(".add_hour").on("click", function (e) {
+		e.preventDefault();
+		let day = document.getElementById("id_day").value;
+		let from_hour = document.getElementById("id_from_hour").value;
+		let to_hour = document.getElementById("id_to_hour").value;
+		let isClosed = document.getElementById("id_is_closed").checked;
+		let csrfToken = $("input[name=csrfmiddlewaretoken]").val();
+		console.log(day, from_hour, to_hour, isClosed, csrfToken);
+		let url = document.getElementById("add_hour_url").value;
+
+		// const addTiming = function (data) {
+		// 	$.ajax({
+		// 		type: "POST",
+		// 		url: url,
+		// 		data: data,
+		// 		},
+		// 		success: function (response){
+		// 		console.log(response);
+
+		// 	});
+		// };
+		const addTimingToTable = function (response) {
+			html = `<tr id="hour-${response.id}">
+				<td>${response.day}</td>
+				<td>${response.from_hour || "Closed"} - ${response.to_hour || "today"}</td>
+			<td>
+				<a href="#" data-url="/vendor/opening-hours/remove/${
+					response.id
+				}" class="remove_hour">Remove</a> </td>
+				</tr>`;
+			$(".opening_hours").append(html);
+			document.getElementById("opening_hours").reset;
+		};
+
+		let data = {
+			day: day,
+			from_hour: from_hour,
+			to_hour: to_hour,
+			is_closed: isClosed,
+			csrfmiddlewaretoken: csrfToken,
+		};
+		if (isClosed && day) {
+			console.log("closed day", day);
+			// addTiming(data);
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: {
+					day: day,
+					from_hour: from_hour,
+					to_hour: to_hour,
+					is_closed: isClosed,
+					csrfmiddlewaretoken: csrfToken,
+				},
+				success: function (response) {
+					if (response.status == "SUCCESS") {
+						addTimingToTable(response);
+					} else {
+						swal(response.error, "", "error");
+					}
+				},
+			});
+			return;
+		}
+
+		if (day && from_hour && to_hour) {
+			console.log("normal day");
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: {
+					day: day,
+					from_hour: from_hour,
+					to_hour: to_hour,
+					is_closed: isClosed,
+					csrfmiddlewaretoken: csrfToken,
+				},
+				success: function (response) {
+					if (response.status == "SUCCESS") {
+						addTimingToTable(response);
+					} else {
+						swal(response.error);
+					}
+				},
+			});
+
+			return;
+		} else {
+			swal("Please fill all fields");
+		}
+	});
+
+	// Remove timings
+
+	$(document).on("click", ".remove_hour", function (e) {
+		e.preventDefault();
+		url = $(this).attr("data-url");
+
+		$.ajax({
+			type: "GET",
+			url: url,
+			success: function (response) {
+				console.log(response);
+
+				if (response.status == "SUCCESS") {
+					document.getElementById(`hour-${response.id}`).remove();
+				} else {
+					swal(response.error, "", "error");
+				}
+			},
+		});
+	});
 });
