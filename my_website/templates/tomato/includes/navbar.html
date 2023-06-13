@@ -19,10 +19,12 @@
                                     <input type="text"
                                            value=""
                                            name="location"
-                                           placeholder="Enter your delivery location"
+                                           placeholder="Your current location"
+                                           id="location"
                                            autocomplete="off" />
                                     <span id="foodbakery_radius_location_open"
-                                          class="foodbakery-radius-location"><i class="icon-target5"></i></span>
+                                          class="foodbakery-radius-location"
+                                          onclick="getLocation()"><i class="icon-target5"></i></span>
                                 </form>
                             </li>
                         </ul>
@@ -60,3 +62,38 @@
 </div>
 </div>
 </header>
+<script>
+    var locationElem = document.getElementById("location");
+    var currentLocation = sessionStorage.getItem("currentLocation");
+    if (currentLocation){
+
+        locationElem.value = currentLocation
+    }
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        locationElem.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+    
+    function showPosition(position) {
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
+
+        {% comment %} ajax to google maps api endpoint {% endcomment %}
+        var GOOGLE_API_KEY = "{{GOOGLE_API_KEY}}"
+        let url ="https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + ","+ lng + "&key=" + GOOGLE_API_KEY 
+        $.ajax({
+            url:url,
+            type: "GET",
+            success: function(response){
+                let currentLocation = response.results[0].formatted_address
+                locationElem.value = currentLocation
+                sessionStorage.setItem("currentLocation", currentLocation)
+                window.location= `?lat=${lat}&lng=${lng}`
+            }
+        })
+    }
+        
+</script>

@@ -39,6 +39,7 @@
         </style>
     </head>
     <body>
+
         <!--Main Wrapper-->
         {% block content %}
             <div class="wrapper">
@@ -151,19 +152,17 @@
                                             {% for vendor in vendors %}
                                                 <li class="has-border">
                                                     <figure>
-                                                        {% if vendor.user_profile.profile_picture %}
  
-                                                            <a href="#">
+                                                        <a href="{% url 'vendor_detail' vendor.vendor_slug %}">
+                                                            {% if vendor.user_profile.profile_picture %}
                                                                 <img src="{{ vendor.user_profile.profile_picture.url }}"
                                                                      class="attachment-full size-full wp-post-image"
                                                                      alt="" />
                                                             </a>
                                                         {% else %}
-                                                            <a href="#">
-                                                                <img src="{% static 'images/default-profile.PNG' %}"
-                                                                     class="attachment-full size-full wp-post-image"
-                                                                     alt="" />
-                                                            </a>
+                                                            <img src="{% static 'images/default-profile.PNG' %}"
+                                                                 class="attachment-full size-full wp-post-image"
+                                                                 alt="" />
                                                         {% endif %}
                                                     </figure>
                                                 </li>
@@ -198,9 +197,9 @@
                                                     <div class="list-post featured">
                                                         <div class="img-holder">
                                                             <figure>
-                                                                <a href="#">
+                                                                <a href="{% url 'vendor_detail' vendor.vendor_slug %}">
                                                                     {% if vendor.user_profile.profile_picture %}
-                                                                        <img src="assets/extra-images/listing-logo18.png"
+                                                                        <img src="{{ vendor.user_profile.profile_picture.url }}"
                                                                              class="img-thumb wp-post-image"
                                                                              alt="" />
                                                                     {% else %}
@@ -217,10 +216,15 @@
  
                                                             <div class="post-title">
                                                                 <h5>
-                                                                    <a href="listing-detail.html">{{ vendor }}</a>
+                                                                    <a href="{% url 'vendor_detail' vendor.vendor_slug %}">{{ vendor }}</a>
                                                                 </h5>
                                                             </div>
                                                             <span>{{ vendor.user_profile.city|default_if_none:"" }} &nbsp; {{ vendor.user_profile.state|default_if_none:"" }} &nbsp; {{ vendor.user_profile.pin_code|default_if_none:"" }}</span>
+                                                            {% if vendor.kms %}
+                                                                <br>
+                                                                <span><small><strong>{{ vendor.kms }}kms away</strong></small></span>
+
+                                                            {% endif %}
  
                                                         </div>
                                                     </div>
