@@ -64,10 +64,11 @@ class Vendor(models.Model):
         current_time = datetime.now().time()
 
         for each in current_open_hours:
-            start = datetime.strptime(each.from_hour, "%I:%M %p").time()
-            end = datetime.strptime(each.to_hour, "%I:%M %p").time()
-            if current_time > start and current_time < end:
-                return True
+            if not each.is_closed:
+                start = datetime.strptime(each.from_hour, "%I:%M %p").time()
+                end = datetime.strptime(each.to_hour, "%I:%M %p").time()
+                if current_time > start and current_time < end:
+                    return True
 
         return False
 

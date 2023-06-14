@@ -1,6 +1,8 @@
+from decimal import Decimal
+
 from menu.models import FoodItem
 
-from .models import Cart
+from .models import Cart, Tax
 
 
 def get_cart_counter(request):
@@ -23,11 +25,24 @@ def get_cart_amount(request):
     grand_total = 0
     if request.user.is_authenticated:
         cart_items = Cart.objects.filter(user=request.user)
-        sub_total: float = 0
+        sub_total = Decimal()
         for item in cart_items:
             food_item = FoodItem.objects.get(pk=item.food_item.id)
-            sub_total += float(food_item.price * item.quantity)
+            sub_total += food_item.price * item.quantity
 
-        tax = 0.1 * sub_total
-        grand_total = sub_total + tax
-        return dict(sub_total=sub_total, tax=tax, grand_total=grand_total)
+        tax = Tax.objects.filter(is_active=True)
+        taxes = {}
+        for each in tax:
+            tax_type = each.tax_type
+            tax_percentage = each.tax_percentage
+            tax_amount = round((tax_percentage * sub_total) / 100, 2)
+            taxes[tax_type] = {str(tax_percentage): tax_amount}
+        print(taxes)
+
+        all_tax = 0
+        for key in taxes.values():
+            for x in key.values():
+                all_tax = all_tax + x
+
+        grand_total = sub_total + all_tax
+        return dict(sub_total=sub_total, taxes=taxes, grand_total=grand_total)

@@ -88,7 +88,7 @@ $(document).ready(function () {
 					//subtotal tax and grand total
 					applyCartAmount(
 						response.cart_amount.sub_total,
-						response.cart_amount.tax,
+						response.cart_amount.taxes,
 						response.cart_amount.grand_total
 					);
 				}
@@ -117,7 +117,7 @@ $(document).ready(function () {
 					$("#qty-" + food_id).html(response.qty);
 					applyCartAmount(
 						response.cart_amount.sub_total,
-						response.cart_amount.tax,
+						response.cart_amount.taxes,
 						response.cart_amount.grand_total
 					);
 					if (response.qty == 0) {
@@ -153,7 +153,7 @@ $(document).ready(function () {
 					swal(response.status, response.message, "success");
 					applyCartAmount(
 						response.cart_amount.sub_total,
-						response.cart_amount.tax,
+						response.cart_amount.taxes,
 						response.cart_amount.grand_total
 					);
 					if (window.location.pathname == "/tomato/cart/") {
@@ -190,15 +190,22 @@ $(document).ready(function () {
 	};
 
 	// apply cart amounts
-	const applyCartAmount = function (subTotal, tax, grandTotal) {
+	const applyCartAmount = function (subTotal, tax_dict, grandTotal) {
 		console.log(subTotal);
-		console.log(tax);
+		console.log(tax_dict);
 		console.log(grandTotal);
 
 		if (window.location.pathname == "/tomato/cart/") {
 			$("#subtotal").html(subTotal);
-			$("#tax").html(tax);
+
 			$("#total").html(grandTotal);
+
+			for (key in tax_dict) {
+				for (key2 in tax_dict[key]) {
+					let tax = tax_dict[key][key2];
+					$(`#tax-${key}`).html(tax);
+				}
+			}
 		}
 	};
 
