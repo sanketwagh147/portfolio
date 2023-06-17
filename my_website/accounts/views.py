@@ -52,6 +52,7 @@ def registerUser(request):
             first_name = form.cleaned_data["first_name"]
             last_name = form.cleaned_data["last_name"]
             username = form.cleaned_data["username"]
+            phone_number = form.cleaned_data["phone_number"]
             email = form.cleaned_data["email"]
             password = form.cleaned_data["password"]
             user = User.objects.create_user(
@@ -60,6 +61,7 @@ def registerUser(request):
                 email=email,
                 username=username,
                 password=password,
+                phone_number=phone_number,
             )
             user.role = User.CUSTOMER
             user.save()

@@ -1,5 +1,5 @@
+from accounts.models import UserProfile
 from django.conf import settings
-
 from vendor.models import Vendor
 
 
@@ -9,6 +9,14 @@ def get_vendor(request):
     except:
         vendor = None
     return dict(vendor=vendor)
+
+
+def get_user_profile(request):
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+    except Exception as err:
+        user_profile = None
+    return dict(user_profile=user_profile)
 
 
 def get_google_api(request):
