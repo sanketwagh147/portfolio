@@ -1,5 +1,6 @@
 from datetime import date, datetime
 
+from accounts.models import UserProfile
 from django.contrib.auth.decorators import login_required
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import GEOSGeometry
@@ -7,9 +8,11 @@ from django.contrib.gis.measure import D
 from django.db.models import Prefetch, Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from marketplace.models import Cart
 from menu.models import Category, FoodItem
+from orders.forms import OrderForms
 from vendor.models import OpeningHour, Vendor
+
+from marketplace.models import Cart
 
 from .context_processors import get_cart_amount, get_cart_counter
 
@@ -223,3 +226,30 @@ def search(request):
     }
     print(vendors)
     return render(request, "marketplace/listings.html", context)
+
+
+@login_required(login_url="login")
+def checkout(request):
+    cart_items = Cart.objects.filter(user=request.user).order_by("created_at")
+    cart_count = cart_items.count()
+    taxes: dict = get_cart_amount(request)
+    if not cart_count:
+        return redirect("marketplace")
+    user_profile = UserProfile.objects.get(user=request.user)
+    initial_values = dict(
+        first_name=request.user.first_name,
+        last_name=request.user.last_name,
+        phone=request.user.phone_number,
+        email=request.user.email,
+        address=user_profile.address,
+        country=user_profile.country,
+        state=user_profile.state,
+        city=user_profile.city,
+        pin_code=user_profile.pin_code,
+    )
+    form = OrderForms(initial=initial_values)
+    context = {
+        "form": form,
+        "cart_items": cart_items,
+    } | taxes
+    return render(request, "marketplace/checkout.html", context)

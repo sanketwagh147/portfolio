@@ -1,0 +1,144 @@
+{% extends 'tomato/base.html' %}
+
+{% block content %}
+    <div class="main-section">
+ 
+
+        <div class="page-section pt-5">
+            <div class="container">
+                <div class="row">
+ 
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="tabs-holder horizontal">
+                            <ul class="stickynav-tabs nav nav-tabs">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#home">Bililing Address</a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content">
+                                <div id="home" class="tab-pane in active">
+                                    <div class="menu-itam-holder">
+
+                                        <div id="menu-item-list-6272" class="menu-itam-list">
+                                            <form action="" method="POST">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-sm-12 col-lg-6">First Name : {{ form.first_name }}</div>
+                                                    <div class="form-group col-md-6 col-sm-12 col-lg-6">Last Name : {{ form.last_name }}</div>
+                                                    <div class="form-group col-md-6 col-sm-12 col-lg-6">Phone Number: {{ form.phone }}</div>
+                                                    <div class="form-group col-md-6 col-sm-12 col-lg-6">Email : {{ form.email }}</div>
+                                                    <div class="form-group col-md-12 col-sm-12 col-lg-12">Address : {{ form.address }}</div>
+                                                    <div class="form-group col-md-6 col-sm-12 col-lg-6">Country : {{ form.country }}</div>
+                                                    <div class="form-group col-md-6 col-sm-12 col-lg-6">State : {{ form.state }}</div>
+                                                    <div class="form-group col-md-6 col-sm-12 col-lg-6">City : {{ form.city }}</div>
+                                                    <div class="form-group col-md-6 col-sm-12 col-lg-6">Pin Code : {{ form.pin_code }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="tabs-holder horizontal">
+                                <ul class="stickynav-tabs nav nav-tabs">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#home"><i class="icon- icon-room_service"></i>Your Order</a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="home" class="tab-pane in active">
+                                        <div class="menu-itam-holder">
+                                            <div id="menu-item-list-6272" class="menu-itam-list">
+
+
+                                                <ul id="cart-items">
+                                                    <div id = "empty-cart" class="text-center p-5 d-none">
+                                                        <h3>Cart is empty please add some food</h3>
+                                                    </div>
+                                                    {% if cart_items %}
+                                                        {% for cart_item in cart_items %}
+                                                            <li id="cart-item-{{ cart_item.id }}">
+                                                                <div class="image-holder">
+                                                                    <img src="{{ cart_item.food_item.image.url }}" alt="" />
+ 
+                                                                </div>
+                                                                <div class="text-holder">
+                                                                    <h6>{{ cart_item.food_item }}</h6>
+                                                                    <h6>{{ cart_item.food_item.description }}</h6>
+                                                                    <a href="{% url 'vendor_detail' cart_item.food_item.vendor.vendor_slug %}"
+                                                                       class="badge badge-warning">{{ cart_item.food_item.vendor }}</a>
+                                                                </div>
+                                                                <div class="quantity"
+                                                                     style="display:inline-block;
+                                                                            position: absolute;
+                                                                            top:50%;
+                                                                            transform:translateY(-50%);
+                                                                            margin-top:-10px">
+                                                                    <span>{{ cart_item.quantity }}  X</span>
+                                                                </div>
+                                                                <div class="price-holder">
+                                                                    <span class="price">₹{{ cart_item.food_item.price }}</span>
+ 
+                                                                </div>
+                                                            </li>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <div class="text-center p-5">
+                                                            <h3>Cart is empty please add some food</h3>
+                                                        </div>
+ 
+ 
+                                                    {% endif %}
+                                                </ul>
+ 
+                                            </div>
+ 
+                                            <div>
+                                                <ul>
+                                                    <li style="list-style-type:none;">
+                                                        Subtotal
+                                                        <span class="price float-right">
+                                                            <span class="currency">₹</span>
+                                                            <span id="subtotal">{{ sub_total }}</span>
+                                                        </span>
+                                                    </li>
+                                                    {% for key, value in taxes.items %}
+                                                        {% for percentage, amount in value.items %}
+ 
+                                                            <li style="list-style-type:none;">
+                                                                {{ key }} <small>({{ percentage }}%)</small>
+                                                                <span class="price float-right">
+                                                                    <span class="currency">₹</span>
+                                                                    <span id="tax-{{ key }}">{{ amount }}</span>
+                                                                </span>
+                                                            </li>
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                    <li style="list-style-type:none; font-weight:600;">
+                                                        Total
+                                                        <span class="price float-right">
+                                                            <span class="currency">₹</span>
+                                                            <span id="total">{{ grand_total }}</span>
+                                                        </span>
+                                                    </li>
+                                                    <button type="submit"  class="btn btn-danger w-100 p-2 mt-3 mb-3">PLACE ORDER</button>
+                                                </ul>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
