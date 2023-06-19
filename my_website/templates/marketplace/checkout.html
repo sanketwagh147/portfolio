@@ -1,4 +1,5 @@
 {% extends 'tomato/base.html' %}
+{% load static %}
 
 {% block content %}
     <div class="main-section">
@@ -21,7 +22,7 @@
                                     <div class="menu-itam-holder">
 
                                         <div id="menu-item-list-6272" class="menu-itam-list">
-                                            <form action="" method="POST">
+                                            <form action="{% url 'place_order' %}" method="POST">
                                                 {% csrf_token %}
                                                 <div class="row">
                                                     <div class="form-group col-md-6 col-sm-12 col-lg-6">First Name : {{ form.first_name }}</div>
@@ -60,40 +61,32 @@
                                                     <div id = "empty-cart" class="text-center p-5 d-none">
                                                         <h3>Cart is empty please add some food</h3>
                                                     </div>
-                                                    {% if cart_items %}
-                                                        {% for cart_item in cart_items %}
-                                                            <li id="cart-item-{{ cart_item.id }}">
-                                                                <div class="image-holder">
-                                                                    <img src="{{ cart_item.food_item.image.url }}" alt="" />
+                                                    {% for cart_item in cart_items %}
+                                                        <li id="cart-item-{{ cart_item.id }}">
+                                                            <div class="image-holder">
+                                                                <img src="{{ cart_item.food_item.image.url }}" alt="" />
  
-                                                                </div>
-                                                                <div class="text-holder">
-                                                                    <h6>{{ cart_item.food_item }}</h6>
-                                                                    <h6>{{ cart_item.food_item.description }}</h6>
-                                                                    <a href="{% url 'vendor_detail' cart_item.food_item.vendor.vendor_slug %}"
-                                                                       class="badge badge-warning">{{ cart_item.food_item.vendor }}</a>
-                                                                </div>
-                                                                <div class="quantity"
-                                                                     style="display:inline-block;
-                                                                            position: absolute;
-                                                                            top:50%;
-                                                                            transform:translateY(-50%);
-                                                                            margin-top:-10px">
-                                                                    <span>{{ cart_item.quantity }}  X</span>
-                                                                </div>
-                                                                <div class="price-holder">
-                                                                    <span class="price">₹{{ cart_item.food_item.price }}</span>
+                                                            </div>
+                                                            <div class="text-holder">
+                                                                <h6>{{ cart_item.food_item }}</h6>
+                                                                <h6>{{ cart_item.food_item.description }}</h6>
+                                                                <a href="{% url 'vendor_detail' cart_item.food_item.vendor.vendor_slug %}"
+                                                                   class="badge badge-warning">{{ cart_item.food_item.vendor }}</a>
+                                                            </div>
+                                                            <div class="quantity"
+                                                                 style="display:inline-block;
+                                                                        position: absolute;
+                                                                        top:50%;
+                                                                        transform:translateY(-50%);
+                                                                        margin-top:-10px">
+                                                                <span>{{ cart_item.quantity }}  X</span>
+                                                            </div>
+                                                            <div class="price-holder">
+                                                                <span class="price">₹{{ cart_item.food_item.price }}</span>
  
-                                                                </div>
-                                                            </li>
-                                                        {% endfor %}
-                                                    {% else %}
-                                                        <div class="text-center p-5">
-                                                            <h3>Cart is empty please add some food</h3>
-                                                        </div>
- 
- 
-                                                    {% endif %}
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
                                                 </ul>
  
                                             </div>
@@ -126,7 +119,27 @@
                                                             <span id="total">{{ grand_total }}</span>
                                                         </span>
                                                     </li>
-                                                    <button type="submit"  class="btn btn-danger w-100 p-2 mt-3 mb-3">PLACE ORDER</button>
+                                                    <h5>SELECT PAYMENT METHOD</h5>
+                                                    <div class="payment-method">
+                                                        <label>
+                                                            <input type="radio" name="payment_method" value="PayPal" />
+                                                            <img width="100px" src="{% static 'images/PayPal.png' %}" alt="paypal" />
+                                                        </label>
+                                                        &nbsp;
+                                                        <label>
+                                                            <input type="radio" name="payment_method" value="RazorPay" />
+                                                            <img width="100px"
+                                                                 src="{% static 'images/razorpay_logo.png' %}"
+                                                                 alt="razor pay" />
+                                                        </label>
+                                                    </div>
+                                                    <div class="text-danger" id="payment-method-error"></div>
+
+                                                    <button type="submit"
+                                                            class="btn btn-danger w-100 p-2 mt-3 mb-3"
+                                                            onclick="return paymentMethodConfirm()">
+                                                        PLACE ORDER
+                                                    </button>
                                                 </ul>
                                             </form>
                                         </div>
@@ -141,4 +154,28 @@
             </div>
         </div>
     </div>
+    <script>
+        function paymentMethodConfirm(){
+            let payMethod = $("input[name='payment_method']:checked").val()
+            if (!payMethod){
+                $("#payment-method-error").html("Please select a payment method")
+                return false
+
+            }else{
+                var confirm_ = confirm(`You have selected ${payMethod} as prefered method.\n Click Ok to continue.`)
+                if (confirm_ == true){
+                    return true
+                }else{
+                    return false
+                }
+            }
+            
+            return False;
+        }
+
+        $("input[name='payment_method']").on("change", function(){
+                $("#payment-method-error").html("")
+
+        })
+    </script>
 {% endblock content %}

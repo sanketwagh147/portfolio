@@ -9,7 +9,7 @@ from django.db.models import Prefetch, Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from menu.models import Category, FoodItem
-from orders.forms import OrderForms
+from orders.forms import OrderForm
 from vendor.models import OpeningHour, Vendor
 
 from marketplace.models import Cart
@@ -247,7 +247,7 @@ def checkout(request):
         city=user_profile.city,
         pin_code=user_profile.pin_code,
     )
-    form = OrderForms(initial=initial_values)
+    form = OrderForm(initial=initial_values)
     context = {
         "form": form,
         "cart_items": cart_items,
