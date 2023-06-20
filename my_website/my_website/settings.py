@@ -20,9 +20,12 @@ from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = BASE_DIR / "static"
+print(STATIC_DIR)
+MEDIA_ROOT = BASE_DIR
 
 MEDIA_URL = "/media/"
 STATIC_ROOT = BASE_DIR / "media"
+print(STATIC_ROOT)
 
 
 # Quick-start development settings - unsuitable for production
@@ -83,6 +86,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "accounts.context_processors.get_vendor",
                 "accounts.context_processors.get_google_api",
+                "accounts.context_processors.get_paypal_client_id",
                 "accounts.context_processors.get_user_profile",
                 "marketplace.context_processors.get_cart_counter",
             ],
@@ -173,3 +177,6 @@ os.environ["PROJ_LIB"] = (
     + os.environ["PATH"]
 )
 GDAL_LIBRARY_PATH = r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-packages\osgeo\gdal304.dll"
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
+PAYPAL_CLIENT_ID = config("PAYPAL_CLIENT_ID")
