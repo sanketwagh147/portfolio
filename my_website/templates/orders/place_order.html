@@ -148,6 +148,7 @@
         }
         let grand_total = "{{ grand_total }}";
         let paymentUrl = "{% url 'payments' %}";
+        let orderComplete = "{% url 'order_complete' %}";
         let orderNumber = "{{ order.order_number }}";
         const csrftoken = getCookie('csrftoken');
         console.log(grand_total)
@@ -199,8 +200,9 @@
                 "status": status,
                 "csrfmiddlewaretoken": csrftoken
             },
-            success: function(resposne){
-                console.log(resposne)
+            success: function(response){
+                console.log(response)
+                window.location.href = `${orderComplete}?order_number=${response.order_number}&transaction_id=${response.transaction_id}`
 
             }
 
