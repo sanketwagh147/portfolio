@@ -180,3 +180,5 @@ GDAL_LIBRARY_PATH = r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-p
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
 PAYPAL_CLIENT_ID = config("PAYPAL_CLIENT_ID")
+RAZOR_PAY_KEY_ID = config("RAZOR_PAY_KEY_ID")
+RAZOR_PAY_SECRET = config("RAZOR_PAY_SECRET")

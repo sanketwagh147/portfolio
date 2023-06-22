@@ -1,6 +1,8 @@
+import razorpay
 import simplejson as json
 from accounts.models import User
 from accounts.utils import send_notification
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
@@ -9,6 +11,13 @@ from marketplace.models import Cart
 from orders.forms import OrderForm
 from orders.models import Order, OrderedFood, Payment
 from orders.utils import generate_order_number
+
+print(settings.RAZOR_PAY_KEY_ID)
+print(settings.RAZOR_PAY_SECRET)
+
+client = razorpay.Client(auth=(settings.RAZOR_PAY_KEY_ID, settings.RAZOR_PAY_SECRET))
+
+# client.order.create(data=DATA)
 
 
 # Create your views here.
@@ -42,7 +51,26 @@ def place_order(request):
             order.save()
             order.order_number = generate_order_number(order.id)
             order.save()
-            context = context | {"order": order, "cart_items": cart_items}
+
+            # Implement razor pay
+            DATA = {
+                "amount": float(order.total)
+                * 100,  # as razor pay accepts amount in paise
+                "currency": "INR",
+                "receipt": f"Receipt #{order.order_number}",
+                # "notes": {"key1": "value3", "key2": "value2"},
+            }
+            razor_pay_order = client.order.create(data=DATA)
+            razor_pay_id = razor_pay_order["id"]
+            # print(razor_pay_order)
+
+            context = context | {
+                "order": order,
+                "cart_items": cart_items,
+                "razor_pay_id": razor_pay_id,
+                "razor_key_id": settings.RAZOR_PAY_KEY_ID,
+                "razor_pay_amount": float(order.total) * 100,
+            }
             return render(request, "orders/place_order.html", context)
         else:
             print(form.errors)
