@@ -9,6 +9,7 @@ from django.template.defaultfilters import slugify
 from django.utils.http import urlsafe_base64_decode
 from vendor.forms import VendorForm
 from vendor.models import Vendor
+from orders.models import Order
 
 from .forms import UserForm
 from .models import User, UserProfile
@@ -185,7 +186,10 @@ def myAccount(request):
 @login_required(login_url="login")
 @user_passes_test(check_role_customer)
 def custDashboard(request):
-    return render(request, "accounts/custDashboard.html")
+    orders = Order.objects.filter(user=request.user, is_ordered=True)
+    recent_orders = orders[:5]
+    context = dict(orders=recent_orders, order_count=recent_orders.count())
+    return render(request, "accounts/custDashboard.html", context)
 
 
 @login_required(login_url="login")

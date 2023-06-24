@@ -4,17 +4,15 @@
             <li class="{% if '/tomato/customer/' == request.path or 'tomato/customer' == request.path %}active{% endif %}">
                 <a href="{% url 'customer' %}"><i class="icon-dashboard3"></i>Dashboard</a>
             </li>
-            <li>
-                <a href="restaurant-restaurant.html"><i class="icon-add_shopping_cart"></i>My order</a>
+            <li class="{% if '/customer/my_orders' in request.path or 'order_detail' in request.path %}active{% endif %}">
+                <a href="{% url 'customer_orders' %}"><i class="icon-add_shopping_cart"></i>My order</a>
             </li>
             <li class=" {% if '/tomato/customer/profile' == request.path %}active{% endif %} ">
                 <a href="{% url 'cprofile' %}"><i class="icon-build"></i>Profile settings</a>
             </li>
+ 
             <li>
-                <a href="restaurant-orders.html"><i class="icon-unlock-alt"></i>Change password</a>
-            </li>
-            <li>
-                <a href="restaurant-earnings.html"><i class="icon-money"></i>Sign</a>
+                <a href="{% url 'logout' %}"><i class="icon-money"></i>Sign Out</a>
             </li>
         </ul>
     </div>
