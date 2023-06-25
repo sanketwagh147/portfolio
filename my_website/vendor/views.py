@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.defaultfilters import slugify
 from menu.forms import CategoryForm, FoodItemForm
 from menu.models import Category, FoodItem, Vendor
+from orders.models import Order, OrderedFood
 
 from .forms import OpeningHourForm, VendorForm
 from .models import OpeningHour, Vendor
@@ -267,3 +268,16 @@ def remove_opening_hours(request, pk):
         hour.delete()
         return JsonResponse(dict(status="SUCCESS", id=pk))
     return JsonResponse(dict(status="FAILED", id=pk))
+
+
+def order_detail(request, order_number):
+    try:
+        order = Order.objects.get(order_number=order_number, is_ordered=True)
+        ordered_food = OrderedFood.objects.filter(
+            order=order, food_item__vendor=get_vendor(request)
+        )
+        print(ordered_food)
+        context = dict(ordered_food=ordered_food, order=order)
+        return render(request, "vendor/order_detail.html", context)
+    except Exception as err:
+        return redirect("vendor")

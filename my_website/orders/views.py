@@ -1,3 +1,4 @@
+from re import sub
 import razorpay
 import simplejson as json
 from accounts.models import User
@@ -7,10 +8,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from marketplace.context_processors import get_cart_amount
-from marketplace.models import Cart
+from marketplace.models import Cart, Tax
+from menu.models import FoodItem
 from orders.forms import OrderForm
 from orders.models import Order, OrderedFood, Payment
 from orders.utils import generate_order_number
+import vendor
 
 print(settings.RAZOR_PAY_KEY_ID)
 print(settings.RAZOR_PAY_SECRET)
@@ -28,8 +31,43 @@ def place_order(request):
     if not cart_count:
         return redirect("marketplace")
 
+    vendors_ids = []
+    for each in cart_items:
+        if each.food_item.vendor.id not in vendors_ids:
+            vendors_ids.append(each.food_item.vendor.id)
+
+    get_tax = Tax.objects.filter(is_active=True)
+    sub_total = 0
+    total_data = {}
+    vendor_dict = {}
+    for item in cart_items:
+        food_item = FoodItem.objects.get(
+            pk=item.food_item.id, vendor_id__in=vendors_ids
+        )
+        v_id = food_item.vendor.id
+        if v_id in vendor_dict:
+            # sub_total = vendor_dict[v_id]
+            sub_total += food_item.price * item.quantity
+            vendor_dict[v_id] += sub_total
+
+        else:
+            sub_total = food_item.price * item.quantity
+            vendor_dict[v_id] = sub_total
+
+        # calcutate tax data
+        tax_dict = {}
+        for i in get_tax:
+            tax_type = i.tax_type
+            tax_percentage = i.tax_percentage
+            tax_amount = round((tax_percentage * sub_total) / 100, 2)
+            tax_dict.update({tax_type: {str(tax_percentage): str(tax_amount)}})
+
+        # total data
+        total_data.update({food_item.vendor.id: {str(sub_total): str(tax_dict)}})
+
+    print(total_data)
+
     context = {**get_cart_amount(request)}
-    print(context)
     if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -46,10 +84,12 @@ def place_order(request):
             order.user = request.user
             order.total = context["grand_total"]
             order.tax_data = json.dumps(context["taxes"])
+            order.total_data = json.dumps(total_data)
             order.total_tax = context["total_tax"]
             order.payment_method = request.POST["payment_method"]
             order.save()
             order.order_number = generate_order_number(order.id)
+            order.vendors.add(*vendors_ids)
             order.save()
 
             # Implement razor pay
