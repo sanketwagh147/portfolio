@@ -1,4 +1,5 @@
 from email import message
+from datetime import datetime
 
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -199,12 +200,23 @@ def vendorDashboard(request):
     orders = Order.objects.filter(vendors__in=[vendor.id], is_ordered=True).order_by(
         "-created_at"
     )
+    total_revenue = sum(
+        float(order.get_total_by_vendor()["grand_total"]) for order in orders
+    )
+    current_month_orders = orders.filter(
+        vendors__in=[vendor.id], created_at__month=datetime.now().month
+    )
+    current_month_revenue = sum(
+        float(order.get_total_by_vendor()["grand_total"])
+        for order in current_month_orders
+    )
     context = {
         "recent_orders": orders[:5],
         "orders": orders,
         "order_count": orders.count(),
+        "total_revenue": total_revenue,
+        "current_month_revenue": current_month_revenue,
     }
-    print(orders)
     return render(request, "accounts/vendorDashboard.html", context)
 
 

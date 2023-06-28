@@ -20,12 +20,10 @@ from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = BASE_DIR / "static"
-print(STATIC_DIR)
 MEDIA_ROOT = BASE_DIR
 
 MEDIA_URL = "/media/"
 STATIC_ROOT = BASE_DIR / "media"
-print(STATIC_ROOT)
 
 
 # Quick-start development settings - unsuitable for production
@@ -69,6 +67,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "orders.request_object.RequestObjectMiddleware",  # custom middle ware gives request object
 ]
 
 ROOT_URLCONF = "my_website.urls"

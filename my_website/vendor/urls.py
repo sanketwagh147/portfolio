@@ -43,4 +43,5 @@ urlpatterns = [
         views.order_detail,
         name="vendor_order_detail",
     ),
+    path("my_orders/", views.my_orders, name="vendor_orders"),
 ]

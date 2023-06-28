@@ -15,8 +15,6 @@ from orders.models import Order, OrderedFood, Payment
 from orders.utils import generate_order_number
 import vendor
 
-print(settings.RAZOR_PAY_KEY_ID)
-print(settings.RAZOR_PAY_SECRET)
 
 client = razorpay.Client(auth=(settings.RAZOR_PAY_KEY_ID, settings.RAZOR_PAY_SECRET))
 

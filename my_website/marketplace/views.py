@@ -145,28 +145,18 @@ def remove_from_cart(request, food_id=None):
 @login_required
 def cart(request):
     cart_items = Cart.objects.filter(user=request.user).order_by("created_at")
-    print(cart_items)
 
     context = dict(cart_items=cart_items)
     context |= get_cart_amount(request)  # type: ignore
-    print("cart content", context)
-    print(context)
     return render(request, "marketplace/cart.html", context)
 
 
 def delete_cart(request, cart_id):
-    print("here 1")
     if request.user.is_authenticated:
-        print("here 2")
         if request.headers.get("x-requested-with") != "XMLHttpRequest":
             return JsonResponse({"status": FAILED, "message": "Invalid Request"})
         try:
-            print("here 3")
-
             if cart_items := Cart.objects.get(user=request.user, id=cart_id):
-                print("here 4")
-                cart_items.delete()
-
                 return JsonResponse(
                     {
                         "status": SUCCESS,

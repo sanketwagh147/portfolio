@@ -22,8 +22,6 @@ from django.urls import include, path
 
 from . import views
 
-# print(f"MEDI url {settings.MEDIA_URL}")
-# print(f"MEDI root {settings.MEDIA_ROOT}")
 
 urlpatterns = [
     path("admin/", admin.site.urls),

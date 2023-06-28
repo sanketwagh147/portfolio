@@ -26,9 +26,7 @@ def get_or_set_current_location(request):
 
 
 def tomato_home(request):
-    print(request.path)
     longitude, latitude = get_or_set_current_location(request)
-    print(longitude, latitude)
     if latitude and longitude:
         pnt = GEOSGeometry(f"POINT({longitude} {latitude})")
 

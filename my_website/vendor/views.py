@@ -65,9 +65,6 @@ def v_profile(request):
 def menu_builder(request):
     vendor = get_vendor(request)
     categories = Category.objects.filter(vendor=vendor).order_by("created_at")
-    print(categories)
-    for each in categories:
-        print(each.id)
     context = {"categories": categories}
     return render(request, f"{VENDOR}/menu_builder.html", context)
 
@@ -223,7 +220,6 @@ def add_opening_hours(request):
         from_hour = request.POST.get("from_hour")
         to_hour = request.POST.get("to_hour")
         is_closed = request.POST.get("is_closed") == "true"
-        print(day, from_hour, to_hour, is_closed)
         try:
             if hour := OpeningHour.objects.create(
                 vendor=get_vendor(request),
@@ -276,8 +272,24 @@ def order_detail(request, order_number):
         ordered_food = OrderedFood.objects.filter(
             order=order, food_item__vendor=get_vendor(request)
         )
-        print(ordered_food)
-        context = dict(ordered_food=ordered_food, order=order)
+        vendor_data = order.get_total_by_vendor()
+        context = dict(
+            ordered_food=ordered_food,
+            order=order,
+            subtotal=vendor_data["sub_total"],
+            tax_data=vendor_data["tax_dict"],
+            grand_total=vendor_data["grand_total"],
+        )
         return render(request, "vendor/order_detail.html", context)
     except Exception as err:
+        print(err)
         return redirect("vendor")
+
+
+def my_orders(request):
+    vendor = Vendor.objects.get(user=request.user)
+    orders = Order.objects.filter(vendors__in=[vendor.id], is_ordered=True).order_by(
+        "-created_at"
+    )
+    context = dict(orders=orders)
+    return render(request, "vendor/my_orders.html", context)

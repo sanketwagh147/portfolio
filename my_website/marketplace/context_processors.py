@@ -37,7 +37,6 @@ def get_cart_amount(request):
             tax_percentage = each.tax_percentage
             tax_amount = round((tax_percentage * sub_total) / 100, 2)
             taxes[tax_type] = {str(tax_percentage): tax_amount}
-        print(taxes)
 
         all_tax = 0
         for key in taxes.values():
