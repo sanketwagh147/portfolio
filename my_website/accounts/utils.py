@@ -36,6 +36,7 @@ def send_mail(request, user, mail_subject, template):
     )
     to_email = user.email
     mail = EmailMessage(mail_subject, message, from_email, to=[to_email])
+    mail.content_subtype = "html"
     mail.send()
 
 
@@ -64,4 +65,5 @@ def send_notification(mail_subject, mail_template, context):
         to_email = [context["user"].email]
 
     mail = EmailMessage(mail_subject, message, from_email, to=to_email)
+    mail.content_subtype = "html"
     mail.send()

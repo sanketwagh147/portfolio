@@ -12,7 +12,8 @@ from marketplace.models import Cart, Tax
 from menu.models import FoodItem
 from orders.forms import OrderForm
 from orders.models import Order, OrderedFood, Payment
-from orders.utils import generate_order_number
+from orders.utils import generate_order_number, order_total_by_vendor
+from django.contrib.sites.shortcuts import get_current_site
 import vendor
 
 
@@ -151,19 +152,50 @@ def payments(request):
             ordered_food.save()
         mail_subject = "Thank you for ordering from tomato"
         mail_template = "orders/order_confirmation_email.html"
-        context = {"user": request.user, "order": order, "to_email": order.email}
+        ordered_food = OrderedFood.objects.filter(order=order)
+        customer_subtotal = sum(
+            [float(item.price * item.quantity) for item in ordered_food]
+        )
+        tax_data = json.loads(order.tax_data)
+        context = {
+            "user": request.user,
+            "order": order,
+            "to_email": order.email,
+            "ordered_food": ordered_food,
+            "domain": get_current_site(request),
+            "customer_subtotal": customer_subtotal,
+            "tax_data": tax_data,
+        }
         send_notification(
             mail_subject=mail_subject, mail_template=mail_template, context=context
         )
         mail_subject = "You have received and order"
         mail_template = "orders/new_order_received_email.html"
-        to_emails = list(set([item.food_item.vendor.user.email for item in cart_items]))
-        context = {"user": request.user, "order": order, "to_email": to_emails}
-        send_notification(
-            mail_subject=mail_subject,
-            mail_template=mail_template,
-            context=context,
-        )
+        # to_emails = list(set([item.food_item.vendor.user.email for item in cart_items]))
+        to_emails = []
+
+        for item in cart_items:
+            if item.food_item.vendor.user.email not in to_emails:
+                to_emails.append(item.food_item.vendor.user.email)
+                ordered_food_to_vendor = OrderedFood.objects.filter(
+                    order=order, food_item__vendor=item.food_item.vendor
+                )
+                vendor_data = order_total_by_vendor(order, item.food_item.vendor.id)
+
+                context = {
+                    "user": request.user,
+                    "order": order,
+                    "to_email": item.food_item.vendor.user.email,
+                    "ordered_food_to_vendor": ordered_food_to_vendor,
+                    "vendor_subtotal": vendor_data["subtotal"],
+                    "grand_total": vendor_data["grand_total"],
+                    "tax_data": vendor_data["tax_dict"],
+                }
+                send_notification(
+                    mail_subject=mail_subject,
+                    mail_template=mail_template,
+                    context=context,
+                )
         cart_items.delete()
         response = dict(order_number=order_number, transaction_id=transaction_id)
         return JsonResponse(response)
