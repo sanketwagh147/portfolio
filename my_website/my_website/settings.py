@@ -34,6 +34,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
+LOCAL = config("LOCAL", default=True, cast=bool)
 
 ALLOWED_HOSTS = ["13.232.32.133", "127.0.0.1", "sanketwagh.com", "www.sanketwagh.com"]
 
@@ -165,17 +166,18 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "TOMATO FOOD ONLINE MARKETPLACE"
 GOOGLE_API_KEY = config("GOOGLE_API_KEY")
 
-os.environ["PATH"] = (
-    r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-packages\osgeo"
-    + ";"
-    + os.environ["PATH"]
-)
-os.environ["PROJ_LIB"] = (
-    r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-packages\osgeo\data\proj"
-    + ";"
-    + os.environ["PATH"]
-)
-GDAL_LIBRARY_PATH = r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-packages\osgeo\gdal304.dll"
+if LOCAL:
+    os.environ["PATH"] = (
+        r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-packages\osgeo"
+        + ";"
+        + os.environ["PATH"]
+    )
+    os.environ["PROJ_LIB"] = (
+        r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-packages\osgeo\data\proj"
+        + ";"
+        + os.environ["PATH"]
+    )
+    GDAL_LIBRARY_PATH = r"C:\Users\sanket wagh\Desktop\Django-hotel\.venv\Lib\site-packages\osgeo\gdal304.dll"
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
 PAYPAL_CLIENT_ID = config("PAYPAL_CLIENT_ID")
