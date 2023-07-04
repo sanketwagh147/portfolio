@@ -4,8 +4,8 @@ architechture/**
 *.pyc
 __pycache__
 *.sqlite3
-*.png
+# *.png
 *.env
-*.jpg
-*.jpeg
+# *.jpg
+# *.jpeg
 
