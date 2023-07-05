@@ -17,3 +17,8 @@ def home(request: HttpRequest):
     print(employees)
     context = {"employees": employees}
     return render(request, "home.html", context=context)
+
+
+def index(request: HttpRequest):
+    return render(request, "home.html")
+    # return "Work in progress"
