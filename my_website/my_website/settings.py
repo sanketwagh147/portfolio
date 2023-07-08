@@ -36,7 +36,13 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=True, cast=bool)
 LOCAL = config("LOCAL", default=True, cast=bool)
 
-ALLOWED_HOSTS = ["13.232.32.133", "127.0.0.1", "sanketwagh.com", "www.sanketwagh.com"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "13.232.32.133",
+    "127.0.0.1",
+    "sanketwagh.com",
+    "www.sanketwagh.com",
+]
 
 
 # Application definition
