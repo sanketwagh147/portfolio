@@ -21,9 +21,11 @@ from django.contrib.messages import constants as messages
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = BASE_DIR / "static"
 MEDIA_ROOT = BASE_DIR
+MEDIA_ROOT = os.path.join(BASE_DIR, "media").replace("\\", "/")
 
 MEDIA_URL = "/media/"
 STATIC_ROOT = BASE_DIR / "media"
+print(BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production

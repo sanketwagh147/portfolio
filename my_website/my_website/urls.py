@@ -22,7 +22,8 @@ from django.urls import include, path
 
 from . import views
 
-
+print(settings.MEDIA_URL)
+print(settings.MEDIA_ROOT)
 urlpatterns = [
     path("", views.index),
     path("admin/", admin.site.urls),
