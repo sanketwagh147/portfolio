@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "django.contrib.gis",
     "customers",
     "orders",
+    "home",
 ]
 
 MIDDLEWARE = [

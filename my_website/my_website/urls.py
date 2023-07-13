@@ -25,7 +25,7 @@ from . import views
 print(settings.MEDIA_URL)
 print(settings.MEDIA_ROOT)
 urlpatterns = [
-    path("", views.index),
+    path("", include("home.urls")),
     path("admin/", admin.site.urls),
     path("dev", views.home, name="home_test"),
     path("employees/", include("employees.urls")),
