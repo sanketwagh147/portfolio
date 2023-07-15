@@ -1299,3 +1299,11 @@ body {
 	transform: translateY(0.35em);
 	height: 1.5em;
 }
+
+.self__photo {
+	box-sizing: content-box;
+	height: 18rem;
+	width: 18rem;
+	border-radius: 50%;
+	border: 3px solid #fff;
+}
