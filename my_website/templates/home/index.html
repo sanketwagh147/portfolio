@@ -23,6 +23,8 @@
         <link rel="shortcut icon"
               type="image/png"
               href="{% static 'natours/favicon/favicon.ico' %}" />
+        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/instagram.css'
+              rel='stylesheet'>
 
         <title>Sanket Wagh</title>
 	
@@ -62,12 +64,25 @@
                     </li>
 	
                     <li class="navigation__item">
-                        <a href="#" class="navigation__link"><span>04</span> Django Food Online Ajpp</a>
+                        <a href="/tomato" class="navigation__link">
+                            <img src="{% static 'natours/img/linkedin.png' %}"
+                                 class='linkedin-icon'
+                                 alt="linkeed in logo" />
+                        LinkedIn</a>
 	
                     </li>
 	
                     <li class="navigation__item">
-                        <a href="#" class="navigation__link"><span>05</span> LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/sanketwagh147/"
+                           class="navigation__link"><span>05</span> Django Food Applicaton : Tomato</a>
+	
+                    </li>
+                    <li class="navigation__item">
+                        <a href="https://github.com/sanketwagh147" class="navigation__link">
+                            <img class="github-icon"
+                                 src="{% static 'natours/img/github-mark-dark.png' %}"
+                                 alt="" />
+                        Github</a>
 	
                     </li>
 	
@@ -96,7 +111,7 @@
                     <span class="heading-primary--sub">Python | Javascript | HTML | CSS | Linux</span>
 	
                 </h1>
-                <a href="#discover-tours" class="btn btn--white btn--animated">Discover our tours</a>
+                <a href="#discover-tours" class="btn btn--white btn--animated">Projects worked on</a>
 	
             </div>
 	
@@ -178,7 +193,7 @@
                                         300px"
                                  alt="photo-1"
                                  class="composition__photo composition__photo--p1"
-                                 src="{% static img/nat-1-large.jpg" />
+                                 src="{% static 'natours/img/nat-1-large.jpg' %}" />
 	
                             <img srcset="img/nat-2.jpg 300w,
                                          img/nat-2-large.jpg 1000w"
@@ -289,7 +304,7 @@
 	
                 <div class="u-center-text u-margin-bottom-big">
 	
-                    <h2 class="heading-secondary">Most popular tours</h2>
+                    <h2 class="heading-secondary">Major Projects</h2>
 	
                 </div>
 
@@ -494,11 +509,13 @@
 	
                         <figure class="story__shape">
 	
-                            <img src="img/nat-8.jpg" class="story__image" alt="person on a tour" />
+                            <img src="{% static 'natours/img/nat-8.jpg' %}"
+                                 class="story__image"
+                                 alt="person on a tour" />
 	
                             <figcaption>
 	
-                                <div class="story__caption">Mary Smith</div>
+                                <div class="story__caption">Python</div>
 	
                             </figcaption>
 	

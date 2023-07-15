@@ -217,7 +217,7 @@ body {
 .btn,
 .btn:link,
 .btn:visited {
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	text-decoration: none;
 	padding: 1.5rem 4rem;
 	display: inline-block;
@@ -864,6 +864,7 @@ body {
 	}
 }
 .header__logo-box {
+	display: none;
 	position: absolute;
 	top: 4rem;
 	left: 4rem;
@@ -1053,8 +1054,8 @@ body {
 }
 @media (max-width: 56.25em) {
 	.navigation__background {
-		top: 4.5rem;
-		right: 4.5rem;
+		top: 3.5rem;
+		right: 3.5rem;
 	}
 }
 @media (max-width: 37.5em) {
@@ -1195,9 +1196,9 @@ body {
 			rgba(85, 197, 122, 0.8),
 			rgba(40, 180, 133, 0.8)
 		),
-		url("../img/nat-4.jpg");
-	background-size: cover;
-	background-position: top;
+		url("../img/code-2.jpg");
+	background-size: contain;
+	background-position: inherit;
 	transform: skewY(-7deg);
 	margin-top: -10rem;
 }
@@ -1289,4 +1290,12 @@ body {
 	.book__form {
 		width: 100%;
 	}
+}
+.linkedin-icon {
+	transform: translateY(0.15em);
+	height: 1.1em;
+}
+.github-icon {
+	transform: translateY(0.35em);
+	height: 1.5em;
 }
