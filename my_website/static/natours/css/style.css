@@ -1309,3 +1309,11 @@ body {
 	border-radius: 50%;
 	border: 3px solid #fff;
 }
+
+.experienced_in{
+	color: #fff !important;
+}
+
+.feature-box > svg{
+	scale: 0.5;
+}
