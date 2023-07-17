@@ -1,0 +1,39 @@
+
+:root{
+    --var-primary-color: green;
+}
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+
+html {
+	font-size: 62.5%;
+}
+body {
+	box-sizing: border-box;
+	/* padding: 3rem; */
+}
+.resume{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-column-gap: 4rem;
+
+}
+.hidden{
+    visibility: hidden;
+}
+
+h1{
+    background-color: var(--var-primary-color);
+}
+
+@media print { 
+    .hidden { 
+      display: none;
+     } 
+    } 
