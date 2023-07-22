@@ -13,16 +13,16 @@
               rel="stylesheet" />
 
 	
-        <link rel="stylesheet" href="{% static 'natours/css/icon-font.css' %}" />
+        <link rel="stylesheet" href="{% static 'portfolio/css/icon-font.css' %}" />
 	
         {% comment %} <link rel="stylesheet" href="css/style.css" /> {% endcomment %}
 	
-        <link rel="stylesheet" href="{% static 'natours/css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}" />
 	
         {% comment %} <link rel="shortcut icon" type="image/png" href="img/favicon.png" /> {% endcomment %}
         <link rel="shortcut icon"
               type="image/png"
-              href="{% static 'natours/favicon/favicon.ico' %}" />
+              href="{% static 'portfolio/favicon/favicon.ico' %}" />
         <link href='https://unpkg.com/css.gg@2.0.0/icons/css/instagram.css'
               rel='stylesheet'>
 
@@ -65,7 +65,7 @@
 	
                     <li class="navigation__item">
                         <a href="/tomato" class="navigation__link">
-                            <img src="{% static 'natours/img/linkedin.png' %}"
+                            <img src="{% static 'portfolio/img/linkedin.png' %}"
                                  class='linkedin-icon'
                                  alt="linkeed in logo" />
                         LinkedIn</a>
@@ -80,7 +80,7 @@
                     <li class="navigation__item">
                         <a href="https://github.com/sanketwagh147" class="navigation__link">
                             <img class="github-icon"
-                                 src="{% static 'natours/img/github-mark-dark.png' %}"
+                                 src="{% static 'portfolio/img/github-mark-dark.png' %}"
                                  alt="" />
                         Github</a>
 	
@@ -96,16 +96,16 @@
 	
             <div class="header__logo-box">
 	
-                {% comment %} <img src="{% static 'natours/img/logo-white.png' %}" alt="logo" class="header__logo" /> {% endcomment %}
+                {% comment %} <img src="{% static 'portfolio/img/logo-white.png' %}" alt="logo" class="header__logo" /> {% endcomment %}
 	
-                <img src="{% static 'natours/favicon/logo.png' %}"
+                <img src="{% static 'portfolio/favicon/logo.png' %}"
                      class="header__logo"
                      alt="Logo" />
 	
             </div>
 	
             <div class="header__text-box">
-                <img src="{% static 'natours/img/user2.jpg' %}" class="self__photo" alt="" />
+                <img src="{% static 'portfolio/img/user2.jpg' %}" class="self__photo" alt="" />
 	
                 <h1 class="heading-primary">
                     <span class="heading-primary--main">Sanket Wagh</span>
@@ -158,25 +158,21 @@
 	
                 </div>
 	
-                <div class="row">
+                <div class="row row-about">
 	
                     <div class="col-1-of-2">
 	
                         <h3 class="heading-tertiary u-margin-bottom-small">My Background</h3>
-	
-                        <p class="paragraph">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
-                            inventore minus quibusdam quaerat aperiam repellat impedit culpa
-                            tempore praesentium suscipit?
-	
-                        </p>
+                        <p class="paragraph">Welcome to my tech-infused world! I'm a passionate computer freak with a knack for Python and front-end development. From a young age, I've been captivated by the endless possibilities technology offers.</p>
+
+                        <p class="paragraph">Python became my coding obsession—its elegance and versatility allowed me to create powerful solutions for real-world challenges, from builing Rest APIs to automation. Paired with HTML, CSS, and JavaScript, I craft interactive, visually appealing websites and applications.</p>
+
+                        <p class="paragraph">Explore my work and join me on this exciting journey of innovation.</p>
 	
                         <h3 class="heading-tertiary u-margin-bottom-small">My Hobbies</h3>
 	
                         <p class="paragraph">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-                            reprehenderit iure quaerat dolor, distinctio sit doloremque
-                            reiciendis eius porro qui.
+                            My hobbies are cooking and video games. In the kitchen, I explore diverse cuisines, experiment with flavors. In virtual worlds, I embark on thrilling adventures, solving quests, and competing with friends, igniting my creativity.
 	
                         </p>
                         <a href="#" class="btn-text">Learn more &rarr;</a>
@@ -187,32 +183,32 @@
 	
                         <div class="composition">
 	
-                            <img srcset="{% static 'natours/img/project-1.png 300w,
+                            <img srcset="{% static 'portfolio/img/project-1.png 300w,
                                          img/project-1.png 1000w' %}"
                                  sizes="(max-width: 56em) 20vw,
                                         (max-width:37.5em) 30vw,
                                         300px"
                                  alt="photo-1"
                                  class="composition__photo composition__photo--p1"
-                                 src="{% static 'natours/img/project-1.png' %}" />
+                                 src="{% static 'portfolio/img/project-1.png' %}" />
 	
-                            <img srcset="{% static 'natours/img/project-2.jpg 300w,
+                            <img srcset="{% static 'portfolio/img/project-2.jpg 300w,
                                          img/project-2.jpg 1000w' %}"
                                  sizes="(max-width: 56em) 20vw,
                                         (max-width:37.5em) 30vw,
                                         300px"
                                  alt="photo-1"
                                  class="composition__photo composition__photo--p2"
-                                 src="{% static 'natours/img/project-2.jpg' %}" />
+                                 src="{% static 'portfolio/img/project-2.jpg' %}" />
 	
-                            <img srcset="{% static 'natours/img/project-3.jpg 300w,
+                            <img srcset="{% static 'portfolio/img/project-3.jpg 300w,
                                          img/project-3.jpg 1000w' %}"
                                  sizes="(max-width: 56em) 20vw,
                                         (max-width:37.5em) 30vw,
                                         300px"
                                  alt="photo-1"
                                  class="composition__photo composition__photo--p3"
-                                 src="{% static 'natours/img/project-3.jpg' %}" />
+                                 src="{% static 'portfolio/img/project-3.jpg' %}" />
                             <!-- <img src="img/nat-1-large.jpg" alt="phot 1" class="composition__photo composition__photo--p1" /><img src="img/nat-2-large.jpg" alt="photo 2" class="composition__photo composition__photo--p2" /><img src="img/nat-3-large.jpg"
      alt="image 3"
      class="composition__photo composition__photo--p3" /> -->
@@ -525,7 +521,7 @@
 	
                         <figure class="story__shape">
 	
-                            <img src="{% static 'natours/img/python-logo-master.png' %}"
+                            <img src="{% static 'portfolio/img/python-logo-master.png' %}"
                                  class="story__image"
                                  alt="person on a tour" />
 	
@@ -561,7 +557,7 @@
 	
                         <figure class="story__shape">
 	
-                            <img src="{% static 'natours/img/javascript-logo.png' %}"
+                            <img src="{% static 'portfolio/img/javascript-logo.png' %}"
                                  class="story__image"
                                  alt="person on a tour" />
 	
@@ -597,7 +593,7 @@
 	
                         <figure class="story__shape">
 	
-                            <img src="{% static 'natours/img/postgres.png' %}"
+                            <img src="{% static 'portfolio/img/postgres.png' %}"
                                  class="story__image"
                                  alt="person on a tour" />
 	
@@ -633,7 +629,7 @@
 	
                         <figure class="story__shape">
 	
-                            <img src="{% static 'natours/img/css.png' %}"
+                            <img src="{% static 'portfolio/img/css.png' %}"
                                  class="story__image"
                                  alt="person on a tour" />
 	
@@ -670,7 +666,7 @@
 	
                         <figure class="story__shape">
 	
-                            <img src="{% static 'natours/img/html.png' %}" class="story__image" alt="person on a tour" />
+                            <img src="{% static 'portfolio/img/html.png' %}" class="story__image" alt="person on a tour" />
 	
                             <figcaption>
 	
@@ -800,7 +796,7 @@
                 <picture class="footer_logo">
 	
 	
-                    <img src="{% static 'natours/favicon/logo.png' %}"
+                    <img src="{% static 'portfolio/favicon/logo.png' %}"
                          alt="full logo"
                          class="footer__logo" />
 	
@@ -841,10 +837,7 @@
                 <div class="col-1-of-2">
 	
                     <p class="footer__copyright">
-                        Built my <a href="#" class="footer__link">Sanket Wagh</a>to know
-                        more Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Distinctio, tempora.
-	
+                        Built my <a href="#" class="footer__link">Sanket Wagh</a> using <strong class="text-white">Django</strong> framework using <strong class="text-white">Postgres</strong> as Database and deployed on <strong class="text-white">EC2</strong> using <strong class="text-white">Postive SSL</strong> from <strong class="text-white">Namecheap</strong>
                     </p>
 	
                 </div>

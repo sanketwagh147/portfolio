@@ -131,9 +131,9 @@ body {
 	display: block;
 	font-size: 2rem;
 	font-weight: 700;
-	letter-spacing: 1rem;
+	letter-spacing: 0.5rem;
 	animation: moveInRight 1s;
-	color: #444;
+	color: #fff;
 }
 @media (max-width: 37.5em) {
 	.heading-primary--sub {
@@ -307,7 +307,7 @@ body {
 	position: relative;
 }
 .composition__photo {
-	width: 55%;
+	width: 70%;
 	box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.4);
 	position: absolute;
 	z-index: 1;
@@ -334,7 +334,7 @@ body {
 }
 .composition__photo--p2 {
 	right: 0;
-	top: 2rem;
+	top: 16em;
 }
 @media (max-width: 56.25em) {
 	.composition__photo--p2 {
@@ -344,8 +344,8 @@ body {
 	}
 }
 .composition__photo--p3 {
-	left: 20%;
-	top: 10rem;
+	left: 0%;
+	top: 32rem;
 }
 @media (max-width: 56.25em) {
 	.composition__photo--p3 {
@@ -891,12 +891,17 @@ body {
 @media (max-width: 56.25em) {
 	.row:not(:last-child) {
 		margin-bottom: 6rem;
+		padding: 0 0.5rem;
 	}
 }
 @media (max-width: 56.25em) {
 	.row {
 		max-width: 50rem;
-		padding: 0 3rem;
+		padding: 0 0.5rem;
+	}
+	.row-about{
+		max-width: 80rem;
+
 	}
 }
 .row::after {
@@ -1071,9 +1076,10 @@ body {
 	width: 0;
 	position: fixed;
 	top: 0;
-	left: 0;
+	right: 0;
 	z-index: 15000;
 	opacity: 0;
+	visibility: hidden;
 	transition: all 0.8s ease-in;
 }
 
@@ -1129,6 +1135,8 @@ body {
 .navigation__checkbox:checked ~ .navigation__nav {
 	opacity: 1;
 	width: 100%;
+	visibility: visible;
+
 }
 
 .navigation__icon {
@@ -1181,17 +1189,23 @@ body {
 
 .section-about {
 	background-color: #f7f7f7;
-	padding: 25rem 0;
+	padding: 25rem 0rem;
 	margin-top: -25vh;
 }
 @media (max-width: 56.25em) {
 	.section-about {
-		padding: 20rem 0;
+		padding: 20rem 3rem;
+	}
+}
+
+@media (max-width: 75em) {
+	.section-about {
+		padding: 20rem 2rem;
 	}
 }
 
 .section-features {
-	padding: 20rem 0;
+	padding: 20rem 1rem;
 	background-image: linear-gradient(
 			to right bottom,
 			rgba(85, 197, 122, 0.8),
@@ -1214,7 +1228,7 @@ body {
 
 .section-projects {
 	background-color: #f7f7f7;
-	padding: 18rem 0 15rem 0;
+	padding: 18rem 1rem 15rem 1rem;
 	margin-top: -10rem;
 }
 
@@ -1233,7 +1247,7 @@ body {
 }
 
 .section-book {
-	padding: 15rem 0;
+	padding: 15rem 1rem;
 	background-image: linear-gradient(to right bottom, #55c57a, #28b485);
 }
 @media (max-width: 56.25em) {
@@ -1316,4 +1330,8 @@ body {
 
 .feature-box > svg{
 	scale: 0.5;
+}
+
+.text-white{
+	color: #eee;
 }
