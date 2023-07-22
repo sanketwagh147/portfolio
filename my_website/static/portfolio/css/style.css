@@ -1018,7 +1018,7 @@ body {
 }
 @media (max-width: 56.25em) {
 	.footer__copyright {
-		width: 80%;
+		width: 100%;
 		float: none;
 	}
 }
@@ -1243,12 +1243,12 @@ body {
 	padding: 20rem 0 10rem 0;
 }
 
-.section-stories {
+.section-interested {
 	position: relative;
 	padding: 15rem 0;
 }
 @media (max-width: 56.25em) {
-	.section-stories {
+	.section-interested {
 		padding: 10rem 0;
 	}
 }
