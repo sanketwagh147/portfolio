@@ -179,6 +179,13 @@ body {
 .paragraph:not(:last-child) {
 	margin-bottom: 3rem;
 }
+.paragraph-card {
+	font-size: 1.6rem;
+	color: #fff;
+}
+.paragraph-card:not(:last-child) {
+	margin-bottom: 1rem;
+}
 
 .u-center-text {
 	text-align: center !important;
@@ -367,7 +374,7 @@ body {
 .feature-box {
 	background-color: rgba(255, 255, 255, 0.8);
 	font-size: 1.5rem;
-	padding: 2.5rem;
+	padding: 2rem;
 	text-align: center;
 	border-radius: 3px;
 	box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
@@ -491,7 +498,7 @@ body {
 	);
 }
 .card__details {
-	padding: 3rem;
+	padding: 1rem;
 }
 .card__details ul {
 	list-style: none;
@@ -849,7 +856,7 @@ body {
 				rgba(85, 197, 122, 0.8),
 				rgba(40, 180, 133, 0.8)
 			),
-			url("../img/hero.jpg");
+			url("../img/code-small.jpg");
 	}
 }
 @media (max-width: 56.25em) {
@@ -1329,7 +1336,17 @@ body {
 }
 
 .feature-box > svg{
-	scale: 0.5;
+	scale: 1;
+}
+@media (max-width: 75em) {
+	.feature-box > svg {
+		scale: 0.75;
+	}
+}
+@media (max-width: 56.25em) {
+	.feature-box > svg {
+		scale: 0.75;
+	}
 }
 
 .text-white{

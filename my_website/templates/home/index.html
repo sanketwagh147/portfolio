@@ -49,7 +49,7 @@
                 <ul class="navigation__list">
 	
                     <li class="navigation__item">
-                        <a href="#" class="navigation__link"><span>01</span> About Me</a>
+                        <a href="/#about" class="navigation__link" onclick="document.getElementById('navi-toggle').click()">About Me</a>
 	
                     </li>
 	
@@ -64,7 +64,7 @@
                     </li>
 	
                     <li class="navigation__item">
-                        <a href="/tomato" class="navigation__link">
+                        <a href="https://www.linkedin.com/in/sanketwagh147/" class="navigation__link">
                             <img src="{% static 'portfolio/img/linkedin.png' %}"
                                  class='linkedin-icon'
                                  alt="linkeed in logo" />
@@ -73,7 +73,7 @@
                     </li>
 	
                     <li class="navigation__item">
-                        <a href="https://www.linkedin.com/in/sanketwagh147/"
+                        <a href="/tomato"
                            class="navigation__link"><span>05</span> Django Food Applicaton : Tomato</a>
 	
                     </li>
@@ -150,7 +150,7 @@
 	
         <main>
 	
-            <section class="section-about">
+            <section class="section-about" id="about">
 	
                 <div class="u-center-text u-margin-bottom-big">
 	
@@ -243,8 +243,7 @@
                             <h3 class="heading-tertiary u-margin-bottom-small">Back-end Skill</h3>
 	
                             <p class="feature-box__text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Tenetur, sit fugit! Esse, temporibus! Repudiandae, nemo.
+                                Proficient in Python, developing scalable and efficient backend solutions, leveraging its libraries and frameworks to ensure seamless functionality and data validation.
 	
                             </p>
 	
@@ -264,8 +263,7 @@
                             <h3 class="heading-tertiary u-margin-bottom-small">Front-end skills</h3>
 	
                             <p class="feature-box__text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Tenetur, sit fugit! Esse, temporibus! Repudiandae, nemo.
+                                Skilled in HTML, CSS, and JavaScript, crafting visually appealing and interactive user interfaces for seamless web experiences, with a focus on responsive design and cross-browser compatibility.
 	
                             </p>
 	
@@ -284,8 +282,7 @@
                             <h3 class="heading-tertiary u-margin-bottom-small">Databases</h3>
 	
                             <p class="feature-box__text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Tenetur, sit fugit! Esse, temporibus! Repudiandae, nemo.
+                                Familiar with managing databases, creating tables, and writing simple queries. Eager to expand knowledge and contribute to backend development with PostgreSQL.
 	
                             </p>
 	
@@ -305,8 +302,7 @@
                             <h3 class="heading-tertiary u-margin-bottom-small">Operating Systems</h3>
 	
                             <p class="feature-box__text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Tenetur, sit fugit! Esse, temporibus! Repudiandae, nemo.
+                                Experienced in navigating the command line, configuring server settings, and troubleshooting issues. Maintaining secure and efficient server environments for backend development
 	
                             </p>
 	
@@ -346,15 +342,15 @@
 	
                                     <ul>
 	
-                                        <li>3 day tours</li>
+                                        <li>Handling 20k request per minute</li>
 	
-                                        <li>Up to 30 people</li>
+                                        <li>CRUD operations</li>
 	
-                                        <li>2 tour guides</li>
+                                        <li>Payload Validation </li>
 	
-                                        <li>Sleep in cozy hotels</li>
+                                        <li>Asynchronous API </li>
 	
-                                        <li>Difficulty: easy</li>
+                                        <li>Middlewares</li>
 	
                                     </ul>
 	
@@ -366,12 +362,14 @@
 	
                                 <div class="card__cta">
 	
-                                    <div class="card__price-box">
+                                            <p class="paragraph-card">
+                                                FastAPI accelerates development with its simplicity and automatic validation, creating robust RESTful APIs effortlessly.
+                                            </p>
+                                            <p class="paragraph-card">Asynchronous support boosts application responsiveness, handling concurrent tasks efficiently for improved scalability</p>
+                                            <p class="paragraph-card">Interactive API documentation saves time and ensures accuracy during testing and debugging processes.</p>
+                                            <p class="paragraph-card">FastAPI's flexibility enables seamless integration with databases and services, building feature-rich web applications with ease.</p>
 	
-                                        <p class="card__price-only">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore itaque praesentium cum repellat ad, sint aspernatur neque temporibus, ullam saepe nesciunt optio inventore alias eum suscipit qui? Commodi, optio unde? Cum a dignissimos velit, beatae placeat atque dolor accusamus aut est natus ad saepe et pariatur sed cupiditate corrupti repellendus illum, consequatur rem quod qui quam eligendi. Laboriosam quis quisquam rem quae autem amet eum, expedita vitae aliquam veniam quidem.</p>
 	
-	
-                                    </div>
 	
                                 </div>
 	
@@ -398,15 +396,15 @@
 	
                                     <ul>
 	
-                                        <li>7 day tours</li>
+                                        <li>Push Notifications</li>
 	
-                                        <li>Up to 50 people</li>
+                                        <li>Data Validation</li>
 	
-                                        <li>6 tour guides</li>
+                                        <li>Template Configuration</li>
 	
-                                        <li>Sleep in provided tents</li>
+                                        <li>Avoiding Duplicates</li>
 	
-                                        <li>Difficulty: medium</li>
+                                        <li>Bulk Notifications</li>
 	
                                     </ul>
 	
@@ -415,17 +413,17 @@
                             </div>
 	
                             <div class="card__side card__side--back card__side--back--2">
-	
                                 <div class="card__cta">
 	
-                                    <div class="card__price-box">
+                                    <p class="paragraph-card">Implemented On-prem whatsapp infrastructure using whatsapp Business APIs</p>
+                                    <p class="paragraph-card">Integration with Moengage for automatic bulk push notifications</p>
+                                    <p class="paragraph-card">Inplemented LRU cache for reusing media and login token</p>
+                                    <p class="paragraph-card">Creating a valid JSON template to invoke Whatsapp business api</p>
+                                    <p class="paragraph-card">Implementing schedulers for timed notifications using python</p>
+
+                        </div>
 	
-                                        <p class="card__price-only">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio voluptates ipsa ab commodi debitis culpa, molestias quidem, consectetur earum impedit temporibus? Asperiores impedit laboriosam fugiat blanditiis earum fuga omnis ex autem. Expedita hic praesentium quia dolorem nesciunt, saepe, consectetur repudiandae dolorum voluptas obcaecati, excepturi odio! Dignissimos eum sequi ad non! Ad temporibus exercitationem maxime dolor minus ipsam est repellendus sed quas, magni modi explicabo nulla facere ipsum suscipit pariatur? Cum?</p>
-	
-	
-                                    </div>
-	
-                                </div>
+                                
 	
                             </div>
 	
@@ -450,15 +448,15 @@
 	
                                     <ul>
 	
-                                        <li>5 day tours</li>
+                                        <li>CBV and functional views</li>
 	
-                                        <li>Up to 15 people</li>
+                                        <li>Model-View-Controller (MVC) Architecture</li>
 	
-                                        <li>3 tour guides</li>
+                                        <li>Object-Relational Mapping (ORM)</li>
 	
-                                        <li>Sleep in provided tents</li>
+                                        <li>URL Routing</li>
 	
-                                        <li>Difficulty: hard</li>
+                                        <li>Form Handling</li>
 	
                                     </ul>
 	
@@ -467,17 +465,16 @@
                             </div>
 	
                             <div class="card__side card__side--back card__side--back--3">
+	<div class="card__cta">
 	
-                                <div class="card__cta">
-	
-                                    <div class="card__price-box">
-	
-                                        <p class="card__price-only">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt officiis fuga ducimus enim eveniet nisi non nesciunt. Perferendis a iste nulla neque dolores laudantium, dicta, unde quaerat accusantium consequatur culpa. Exercitationem animi rem distinctio fugit, doloremque amet quae dolore ducimus fugiat ratione sit dolores aliquam. Voluptatum cum deserunt error nesciunt debitis dicta vitae nisi sunt, nam ipsam! Corporis non saepe neque molestias consectetur culpa iste accusantium error, consequuntur cum maxime.</p>
-	
-	
-                                    </div>
-	
-                                </div>
+                                    <p class="paragraph-card">Django follows the MVC architectural pattern, organizing code into models (data handling), views (presentation logic), and templates (user interface).</p>
+                                    
+                                    <p class="paragraph-card"> Django's ORM simplifies database interactions by allowing developers to work with Python objects instead of raw SQL queries, making it easy to perform database operations.</p>
+                                    <p class="paragraph-card">Django's template engine enables the separation of HTML and Python code, promoting code reusability and maintainability.</p>
+                                    <p class="paragraph-card">Django's URL routing mechanism allows developers to map URLs to specific views and functions, making it easier to create clean and readable URLs for the application</p>
+
+                        </div>
+                                
 	
                             </div>
 	
@@ -496,18 +493,7 @@
 	
             <section class="section-stories">
 	
-                <div class="bg-video">
-	
-                    <video class="bg-video__content" autoplay muted loop>
-	
-                        <source src="img/video.mp4" type="video/mp4" />
-	
-                        <source src="img/video.webm" type="video/webm" />
-                        Your browser is not supported!
-	
-                    </video>
-	
-                </div>
+                
 	
                 <div class="u-center-text u-margin-bottom-big">
 	
@@ -535,16 +521,10 @@
 	
                         <div class="story__text">
 	
-                            <h3 class="heading-tertiary u-margin-bottom-small">I had the best week ever with my family</h3>
+                            <h3 class="heading-tertiary u-margin-bottom-small">
+Proficient and versatile Python developer with strong problem-solving abilities.</h3>
 	
-                            <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem
-                                neque aut sunt iusto ipsum culpa dolores reiciendis quo, saepe
-                                explicabo itaque, deserunt necessitatibus obcaecati? Quidem
-                                culpa similique cupiditate quia adipisci tempora enim temporibus
-                                omnis molestiae. Possimus excepturi.
-	
-                            </p>
+                            <p>I possess exceptional skills in Python, demonstrating proficiency in developing efficient and scalable applications. My expertise spans various areas, such as data manipulation, web development, automation, and problem-solving, making you a valuable asset in the software development landscape.</p>
 	
                         </div>
 	
@@ -563,7 +543,7 @@
 	
                             <figcaption>
 	
-                                <div class="story__caption">Javascript</div>
+                                <div class="story__caption">Solid intermediate JavaScript skills, adept at web development and problem-solving.</div>
 	
                             </figcaption>
 	
@@ -574,11 +554,7 @@
                             <h3 class="heading-tertiary u-margin-bottom-small">I had the best week ever with my family</h3>
 	
                             <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem
-                                neque aut sunt iusto ipsum culpa dolores reiciendis quo, saepe
-                                explicabo itaque, deserunt necessitatibus obcaecati? Quidem
-                                culpa similique cupiditate quia adipisci tempora enim temporibus
-                                omnis molestiae. Possimus excepturi.
+                                With solid intermediate JavaScript skills, I excel in developing dynamic and interactive web applications. My proficiency in front-end frameworks and ability to implement complex functionalities demonstrate my commitment to delivering high-quality code and exceptional user experiences
 	
                             </p>
 	
@@ -607,14 +583,10 @@
 	
                         <div class="story__text">
 	
-                            <h3 class="heading-tertiary u-margin-bottom-small">I had the best week ever with my family</h3>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Familiar with basic PostgreSQL tasks, including DML and simple queries and joins</h3>
 	
                             <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem
-                                neque aut sunt iusto ipsum culpa dolores reiciendis quo, saepe
-                                explicabo itaque, deserunt necessitatibus obcaecati? Quidem
-                                culpa similique cupiditate quia adipisci tempora enim temporibus
-                                omnis molestiae. Possimus excepturi.
+                                With medium-level PostgreSQL DML skills, I adeptly handle data manipulation tasks like inserting, updating, and deleting records. Proficient in crafting complex queries and ensuring data integrity, contributing to efficient and reliable database operations for web applications
 	
                             </p>
 	
@@ -643,14 +615,10 @@
 	
                         <div class="story__text">
 	
-                            <h3 class="heading-tertiary u-margin-bottom-small">I had the best week ever with my family</h3>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Proficient in CSS, designing visually stunning and responsive web interfaces.</h3>
 	
                             <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem
-                                neque aut sunt iusto ipsum culpa dolores reiciendis quo, saepe
-                                explicabo itaque, deserunt necessitatibus obcaecati? Quidem
-                                culpa similique cupiditate quia adipisci tempora enim temporibus
-                                omnis molestiae. Possimus excepturi.
+                                I expertly style web interfaces, ensuring visual coherence and responsiveness across devices. Proficient in layout design, animations, and adapting to various browsers, contributing to captivating and user-friendly web experiences.
 	
                             </p>
 	
@@ -678,15 +646,10 @@
 	
                         <div class="story__text">
 	
-                            <h3 class="heading-tertiary u-margin-bottom-small">Wow! My life is completely different now!</h3>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Proficient in HTML, creating user-friendly and visually appealing websites.</h3>
 	
                             <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem
-                                neque aut sunt iusto ipsum culpa dolores reiciendis quo, saepe
-                                explicabo itaque, deserunt necessitatibus obcaecati? Quidem
-                                culpa similique cupiditate quia adipisci tempora enim temporibus
-                                omnis molestiae. Possimus excepturi.
-	
+                                With medium-level PostgreSQL DML skills, I adeptly handle data manipulation tasks like inserting, updating, and deleting records. Proficient in crafting complex queries and ensuring data integrity, contributing to efficient and reliable database operations for web applications
                             </p>
 	
                         </div>
