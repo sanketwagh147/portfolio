@@ -68,6 +68,7 @@
 	}
 }
 body {
+
 	margin: 0;
 	font-family: var(--bs-body-font-family);
 	font-size: var(--bs-body-font-size);
@@ -176,7 +177,7 @@ ol,
 ul,
 dl {
 	margin-top: 0;
-	margin-bottom: 1rem;
+	margin-bottom: 0.5rem;
 }
 ol ol,
 ul ul,
@@ -11715,6 +11716,9 @@ a.btn svg {
 	min-height: 60px;
 	padding-top: 1rem;
 }
+.top-bar-inner{
+	margin-top: 0.5rem ;
+}
 .top-bar .top-bar-cta {
 	position: absolute;
 	right: 0;
@@ -11962,4 +11966,8 @@ a { color: inherit; }
 a:hover{
     text-decoration: none;
     color: var(--bs-gray-100);
+}
+
+h6{
+	font-weight: normal !important;
 }
