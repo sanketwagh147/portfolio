@@ -11971,3 +11971,7 @@ a:hover{
 h6{
 	font-weight: normal !important;
 }
+
+.border-bottom{
+	border-bottom: thick double #fff !important;
+}
